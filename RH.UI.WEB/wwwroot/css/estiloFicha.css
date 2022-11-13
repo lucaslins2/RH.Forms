@@ -1,0 +1,90 @@
+body{
+    height: calc(100vh - 80px);
+}
+.p-titulo {
+    font-size: 2rem;
+    color: #6D6D6F;
+    padding-top: 30px;
+}
+
+.div-card {
+    margin-top: 40px;
+    background-color: #FFF;
+    border-radius: 50px;
+    box-shadow: 5px 10px;
+    background: #FFFFFF;
+    padding: 70px 100px 55px 100px;
+    box-shadow: -4px 4px 15px -2px rgba(0, 0, 0, 0.32);
+}
+
+.div-form-icon-active {
+    border-radius: 30px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #FFFFFF;
+    background: #3390F1;
+    padding: 25px;
+}
+.div-form-icon {
+    border-radius: 30px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #FFFFFF;
+    background: #6D6D6F;
+    padding: 25px;
+}
+
+.div-card p {
+    padding-top: 15px;
+}
+
+.img-icon {
+    filter: invert(92%) sepia(93%) saturate(0%) hue-rotate(202deg) brightness(106%) contrast(106%);
+}
+.button-end{
+    background: #3390F1;
+    color: #ffff;
+}
+.btn-from-end{
+    margin-bottom: 15px;
+    padding-top: 0.5rem;
+    padding-right: 5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 5rem;
+}
+
+@media (max-width: 850px) {
+    .div-container-card {
+        flex-direction: column !important;
+    }
+    .div-from-end{
+        align-items: center !important;
+    }
+    .p-titulo {
+        margin-bottom: 0px;
+    }
+    .div-card{
+        padding: 50px 80px 35px 80px;
+    }
+}
+
+@media (max-width: 450px) {
+    .div-card{
+        padding: 40px 55px 25px 55px;
+    }
+    .p-titulo {
+        font-size: 1.5rem;
+    }
+    .div-card {
+        margin-top: 20px;
+        border-radius: 40px;
+    }
+    .div-form-icon img{
+        width: 40px;
+        height: 40px;
+    }
+    .div-form-icon-active img{
+        width: 40px;
+        height: 40px;
+    }
+}
