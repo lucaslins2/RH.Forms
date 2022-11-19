@@ -6,9 +6,11 @@ namespace RH.Models
 
     public class Usuario
     {
+
         public int IdUsuario { get; set; }  
+        public string cpf { get; set; }
         [Required(ErrorMessage = "O usuario é obrigatório")]
-        public string usuario { get; set; }
+        public string nome { get; set; }
 
         public string email { get; set; }
         [Required(ErrorMessage = "a senha é obrigatório")]

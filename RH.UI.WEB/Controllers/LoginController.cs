@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace RH.UI.WEB.Controllers
 {
@@ -39,16 +41,18 @@ namespace RH.UI.WEB.Controllers
 
                 var claims = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.Name, usuario.usuario)
+                    new Claim(ClaimTypes.Name, usuario.nome),
+                    new Claim(ClaimTypes.Sid, usuario.IdUsuario.ToString()),
                 };
 
-                var usuarioIdentidade = new ClaimsIdentity(claims, "login");
+                var usuarioIdentidade = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 ClaimsPrincipal principal = new ClaimsPrincipal(usuarioIdentidade);
+                var props = new AuthenticationProperties();
 
-      
 
-                await HttpContext.SignInAsync(principal);
 
+                await HttpContext.SignInAsync(principal, props);
+               // var userId = HttpContext.User.Claims.
                 return RedirectToAction("Index","Home");  
             
             }
@@ -58,8 +62,12 @@ namespace RH.UI.WEB.Controllers
             return RedirectToAction("Index","Login");
 
         }
+        public async Task <IActionResult> Sair() {
 
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index", "Login");
 
+        }
         [HttpPost]
         public IActionResult Registrar([FromForm]Login  login) {
 
@@ -68,7 +76,8 @@ namespace RH.UI.WEB.Controllers
             {
                 Usuario usuarios = new Usuario();
                 LoginBLL loginBLL = new LoginBLL();
-                usuarios.usuario = login.usuario;
+                usuarios.cpf = login.cpf;
+                usuarios.nome = login.nome;
                 usuarios.senha = login.senha;
                 usuarios.email = login.email;
 

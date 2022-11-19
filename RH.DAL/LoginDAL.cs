@@ -11,20 +11,20 @@ namespace RH.DAL
     {
         private Conexao conexao;
       
-        public Usuario GetLogin ( string  usuario, string senha){
+        public Usuario GetLogin ( string usuario, string senha){
 
-            var sql = "SELECT IdUsuario, NomeUser, Senha, Email " +
-        " From usuario" +
-        " WHERE NomeUser = @usuario AND Senha =  @senha";
+            var sql = "SELECT id, cpf,nome,email,  senha " +
+         " FROM usuario" +
+        "  WHERE senha = @senha AND cpf = @usuario OR email = @usuario ";
 
             Usuario usuarios = null;// new Usuario();
 
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = sql;
-            cmd.Parameters.Add("@usuario", MySqlDbType.VarChar, 11);
+            cmd.Parameters.Add("@usuario", MySqlDbType.VarChar, 14);
             cmd.Parameters["@usuario"].Value = usuario;
-            cmd.Parameters.Add("@senha", MySqlDbType.VarChar, 11);
+            cmd.Parameters.Add("@senha", MySqlDbType.VarChar, 14);
             cmd.Parameters["@senha"].Value = senha;
 
             // Executa Comando => WGSC
@@ -37,10 +37,12 @@ namespace RH.DAL
                     //string nomeUsuario = retornoDr["NomeUsuario"].ToString();
                     usuarios = new Usuario()
                     {
-                        IdUsuario = int.Parse(retornoDr["IdUsuario"].ToString()),
-                        usuario = retornoDr["NomeUser"].ToString(),
-                        senha = retornoDr["Senha"].ToString(),
-                        email = retornoDr["Email"].ToString(),
+                        IdUsuario = int.Parse(retornoDr["id"].ToString()),
+                        cpf = retornoDr["cpf"].ToString(),
+                        nome = retornoDr["nome"].ToString(),
+                        email = retornoDr["email"].ToString(),
+                        senha = retornoDr["senha"].ToString(),
+                       
                     //    admin = Byte.Parse(retornoDr["Admin"].ToString()),
                     };
                 } 
@@ -58,16 +60,16 @@ namespace RH.DAL
             
 
 
-                string sql = "INSERT INTO usuario(NomeUser, Senha, Email, Admin) Values (@Usuario, @Senha, @Email, @Admin);";
+                string sql = "INSERT INTO usuario(cpf,nome, email, senha, admin) Values (@cpf, @nome,@email, @senha, @admin);";
 
                 MySqlCommand cmd = new MySqlCommand();
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = sql;
-
-                cmd.Parameters.AddWithValue("@Usuario", usuario.usuario);
-                cmd.Parameters.AddWithValue("@Senha", usuario.senha);
-                cmd.Parameters.AddWithValue("@Email", usuario.email);
-                cmd.Parameters.AddWithValue("@Admin", 0);
+                cmd.Parameters.AddWithValue("@cpf", usuario.cpf);
+                cmd.Parameters.AddWithValue("@nome", usuario.nome);
+                cmd.Parameters.AddWithValue("@senha", usuario.senha);
+                cmd.Parameters.AddWithValue("@email", usuario.email);
+                cmd.Parameters.AddWithValue("@admin", 0);
 
             using (conexao = new Conexao(null))
             {

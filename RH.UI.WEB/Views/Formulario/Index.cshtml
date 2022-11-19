@@ -1,0 +1,111 @@
+﻿@using RH.Models;
+@model DadosPessoaisForm1;
+
+
+<link rel="stylesheet" href="../css/estiloForm.css">
+
+<div class="container h-100">
+    <div class="div-dados-informacao">
+        <a href="home"><img class="img-icon" src="../img/seta-lado.png" alt=""></a>
+        <p>Dados Pessoais - 17/10/2022</p>
+    </div>
+
+    <form method="post" asp-action="SalvarForm1">
+        <div class="d-flex flex-row justify-content-between h-100 w-100 div-responsivo">
+            <div class="d-flex flex-column justify-content-between w-50 input-responsivo">
+                <div class="w-100 p-3">
+                    <label for="cargo" class="form-label">Cargo Pretendido:</label>
+                    <select class="form-select" asp-for="idCargo" asp-items="ViewBag.selectCargos" aria-label="cargo">
+                        <option selected>Selecione Um Cargo</option>
+                        @*<option selected>Selecione Um Cargo</option>
+                        <option value="1">Assistente Administrativo</option>*@
+                    </select>
+                </div>
+                <div class="w-100 p-3">
+                    <label for="nome" class="form-label">Nome Completo:</label>
+                    <input type="text" asp-for="nomecompleto" class="form-control" id="nome" placeholder="Insira o nome completo">
+                </div>
+            </div>
+
+            <div class="p-3 foto-responsivo">
+                <div type="button" class="div-upload-foto div-card">
+                    <img src="~/img/user-foto.png" id="FotoPerfil" onclick="uploadImg();" alt="">
+                    <input type="file" id="ftPerfilInput" accept=".jpeg,.png" hidden>
+                    <input type="hidden" asp-for="fotoperfil" id="fotoperfilback" />
+                    <p>Insira a foto de perfil</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="div-dados-informacao">
+            <p>Filiação</p>
+        </div>
+
+        <div class="d-flex flex-row justify-content-between w-100 div-responsivo">
+            <div class="w-100 p-3">
+                <label for="pai" class="form-label">Pai:</label>
+                <input type="text" class="form-control" asp-for="nomepai" id="nome" placeholder="Insira o nome de seu pai">
+            </div>
+            <div class="w-100 p-3">
+                <label for="nome" class="form-label">Mãe:</label>
+                <input type="text" class="form-control" asp-for="nomemae"  id="nome" placeholder="Insira o nome de sua mãe">
+            </div>
+        </div>
+
+        <div class="d-flex flex-row justify-content-between w-100 div-responsivo">
+            <div class="w-100 p-3">
+                <label for="EstadoCivil" class="form-label">Estado civil:</label>
+                <select class="form-select" asp-for="idestadocivil" asp-items="ViewBag.selectEstadoCivil" aria-label="EstadoCivil">
+                    <option selected>Selecione Um Cargo</option>
+                @*    <option value="1">Solteiro</option>*@
+                </select>
+            </div>
+            <div class="w-100 p-3">
+                <label for="nomeEsposa" class="form-label">Nome da Esposa:</label>
+                <input type="text" class="form-control" id="nomeEsposa" asp-for="nomeesposa" placeholder="Insira o nome de sua esposa">
+            </div>
+        </div>
+
+        <div class="d-flex flex-row justify-content-between w-100 div-responsivo">
+            <div class="w-100 p-3">
+                <label for="dataNascimento" class="form-label">Data de nascimento:</label>
+                <input type="date" class="form-control" asp-for="dtanascimento" id="dataNascimento">
+            </div>
+            <div class="w-100 p-3">
+                <label for="NumeroDependentes" class="form-label">Nº de Dependentes:</label>
+                <input type="number" class="form-control" asp-for="nrodepedentes" id="NumeroDependentes" placeholder="Insira o quantidade">
+            </div>
+        </div>
+
+        <div class="d-flex flex-row justify-content-between w-100 div-responsivo">
+            <div class="w-100 p-3">
+                <label for="naturalidade" class="form-label">Naturalidade:</label>
+                <input type="text" class="form-control" id="naturalidade" asp-for="naturalidade" placeholder="Insira sua naturalidade">
+            </div>
+            <div class="w-100 p-3">
+                <label for="nacionalidade" class="form-label">Nacionalidade:</label>
+                <input type="text" class="form-control" id="nacionalidade" asp-for="nacionalidade" placeholder="Insira sua nacionalidade">
+            </div>
+        </div>
+
+        <div class="d-flex flex-row justify-content-between w-100 div-responsivo">
+            <div class="w-50 p-3 input-responsivo">
+                <label for="EstadoCivil" class="form-label">Grau de instruçã:</label>
+                <select class="form-select"  asp-items="ViewBag.selectGrau" aria-label="EstadoCivil">
+                    <option selected>Selecione o grau de instrução</option>
+                    @*<option value="1">Superior</option>*@
+                </select>
+            </div>
+        </div>
+
+        <div class="div-dados-informacao">
+            <p>Demais Informações</p>
+        </div>
+
+        <div class="d-flex flex-column align-items-end justify-content-end w-100 h-100 div-from-end">
+            <input type="submit" href="#" class="btn button-end btn-lg btn-from-end" value="Próximo" />
+        </div>
+    </form>
+
+</div>
+
