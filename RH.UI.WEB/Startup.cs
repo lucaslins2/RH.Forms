@@ -65,27 +65,33 @@ namespace RH.UI.WEB
             app.UseRouting();
 
             app.UseAuthorization();
-            app.Use(async (ctx, next) =>
-            {
-                await next();
+            //app.Use(async (ctx, next) =>
+            //{
+            //    await next();
 
-                if (ctx.Response.StatusCode == 404 && !ctx.Response.HasStarted)
-                {
-                    //Re-execute the request so the user gets the error page
-                    /*  string originalPath = ctx.Request.Path.Value;
-                      ctx.Items["originalPath"] = originalPath;
-                      ctx.Request.Path = "/Home/Index";
-                      await next();*/
-                    ctx.Response.Redirect("/Home/Index");
-                }
-            });
+            //    if (ctx.Response.StatusCode == 404 && !ctx.Response.HasStarted)
+            //    {
+            //        //Re-execute the request so the user gets the error page
+            //       string originalPath = ctx.Request.Path.Value;
+            //          ctx.Items["originalPath"] = originalPath;
+            //          ctx.Request.Path = "/Home/Index";
+            //          await next();
+            //        ctx.Response.Redirect("/Home/Index");
+            //    }
+            //});
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapFallback(context => {
+                    context.Response.Redirect("Home");
+                    return Task.CompletedTask;
+                });
             });
+
 
       
         }

@@ -1,5 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 body{
     height: calc(100vh - 80px);
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+      
 }
 .p-titulo {
     font-size: 2rem;
@@ -36,6 +40,7 @@ body{
 
 .div-card p {
     padding-top: 15px;
+    min-width: 130px;
 }
 
 .img-icon {

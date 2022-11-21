@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -7,6 +9,7 @@ using RH.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace RH.UI.WEB.Controllers
 {
@@ -22,9 +25,6 @@ namespace RH.UI.WEB.Controllers
             foreach (var item in cargos) {
                 itemsCargos.Add(new SelectListItem() { Text = item.cargo, Value = item.idCargo.ToString(), Selected = false });
             }
-
-
-
 
             SelectList selectCargos = new SelectList(itemsCargos, "Value", "Text", "0");
             ViewBag.selectCargos = selectCargos;
@@ -48,17 +48,30 @@ namespace RH.UI.WEB.Controllers
             SelectList selectEstadoCivil = new SelectList(itemsSoleteiro, "Value", "Text", "0");
             ViewBag.selectEstadoCivil = selectEstadoCivil;
 
+
+            List<SelectListItem> itemsUF = new List<SelectListItem>();
+            EstadoBLL estadoBLL = new EstadoBLL();
+            foreach (var item in estadoBLL.GetEstados())
+            {
+                itemsUF.Add(new SelectListItem() { Text = item.estado, Value = item.idUF.ToString(), Selected = false });
+
+            }
+            SelectList selectEstado = new SelectList(itemsUF, "Value", "Text", "0");
+            ViewBag.selectEstados = selectEstado;
+
             //Acessa ao banco para pega se informacaoes eciste
             //DadosPessoaisForm1 dadosPessoaisForm1 = new DadosPessoaisForm1();
             var UserID = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
             DadosPessoaisForm1BLL DadosPessoaisForm1BLL = new DadosPessoaisForm1BLL();
             var DadosPessoaisForm1 = DadosPessoaisForm1BLL.GetDadosPessoaisForm1(int.Parse(UserID));
-           // dadosPessoaisForm1.idCargo = 2;
+
+            //DadosPessoaisForm1.categoriasCNH = new List<string> {"A","B","C" };           // dadosPessoaisForm1.idCargo = 2;
+      
             return View(DadosPessoaisForm1);
         }
 
         [HttpPost]
-        public IActionResult SalvarForm1(DadosPessoaisForm1 dadosPessoaisForm1) {
+        public async Task<IActionResult> SalvarForm1(DadosPessoaisForm1 dadosPessoaisForm1) {
 
             //Pega id do usaurio no cookies
             var UserID = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
@@ -77,7 +90,21 @@ namespace RH.UI.WEB.Controllers
 
             }
 
-            return View();
+            var claims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, dadosPessoaisForm1.nomecompleto),
+                    new Claim(ClaimTypes.Sid, UserID.ToString()),
+                };
+
+            var usuarioIdentidade = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            ClaimsPrincipal principal = new ClaimsPrincipal(usuarioIdentidade);
+            var props = new AuthenticationProperties();
+
+
+
+            await HttpContext.SignInAsync(principal, props);
+
+            return RedirectToAction("Index", "Home");
         
         }
     }

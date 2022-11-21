@@ -6,23 +6,23 @@
     scrollbar-color: #3390F1 #E5E5EA;
 }
 
-    /* Works on Chrome, Edge, and Safari */
-    *::-webkit-scrollbar {
-        width: 9px;
-    }
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 9px;
+}
 
-    *::-webkit-scrollbar-track {
-        background: #E5E5EA;
-    }
+*::-webkit-scrollbar-track {
+    background: #E5E5EA;
+}
 
-    *::-webkit-scrollbar-thumb {
-        background-color: #3390F1;
-        border-radius: 20px;
-        border: 1px solid #E5E5EA;
-    }
+*::-webkit-scrollbar-thumb {
+    background-color: #3390F1;
+    border-radius: 20px;
+    border: 1px solid #E5E5EA;
+}
 
 body {
-    height: calc(100vh - 80px);
+    height: calc(100vh - 176px);
     font-family: "Poppins", sans-serif;
 }
 
@@ -39,8 +39,13 @@ select {
     margin-left: 10px;
 }
 
-.container {
-    padding-top: 40px;
+.container-fluid {
+    width: calc(100% - 8%);
+    padding-bottom: 15px;
+}
+
+.scroll {
+    margin-top: 35px;
     overflow-y: scroll;
 }
 
@@ -51,17 +56,17 @@ select {
     width: 190px;
 }
 
-    .div-upload-foto p {
-        font-size: 15px;
-        color: #B6B6B7;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
+.div-upload-foto p {
+    font-size: 15px;
+    color: #B6B6B7;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
-    .div-upload-foto img {
-        height: 130px;
-        padding-bottom: 5px;
-    }
+.div-upload-foto img {
+    height: 130px;
+    padding-bottom: 5px;
+}
 
 .div-card {
     background-color: #FFF;
@@ -81,30 +86,57 @@ select {
 .div-dados-informacao {
     display: flex;
     align-items: center;
-    padding-bottom: 35px;
+    padding-left: 10px;
+    margin-top: 40px;
 }
 
-    .div-dados-informacao p {
-        font-size: 1.5rem;
-        color: #6D6D6F;
-        padding-left: 15px;
-        margin: 0px;
-    }
+.div-dados-informacao p {
+    font-size: 1.5rem;
+    color: #6D6D6F;
+    padding-left: 15px;
+    margin: 0px;
+}
 
-    .div-dados-informacao:nth-child(2n) {
-        margin-top: 40px;
-    }
-
-        .div-dados-informacao:nth-child(2n) p {
-            padding-left: 40px;
-        }
+.div-dados-informacao:nth-child(2n) {
+    padding-left: 18px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
 
 .button-end {
     background: #3390F1;
     color: #ffff;
 }
 
-@media (max-width: 570px) {
+.multipleSelect {
+    max-width: 100% !important;
+    border-radius: 10px !important;
+    box-shadow: -1px 3px 6px -2px rgba(0, 0, 0, 0.32);
+}
+
+.vscomp-toggle-button {
+    border-radius: 10px !important;
+    height: 45px !important;
+    width: 100% !important;
+    padding: 10px 30px 10px 10px !important;
+}
+
+.vscomp-value {
+    color: #212529 !important;
+    font-size: 15px !important;
+    opacity: 1 !important;
+    font-family: "Poppins", sans-serif !important;
+}
+
+
+
+@media (max-width: 730px) {
+    .container-fluid {
+        width: calc(100%);
+    }
+}
+
+@media (max-width: 650px) {
     .div-responsivo {
         flex-direction: column !important;
     }
@@ -116,5 +148,31 @@ select {
     .foto-responsivo {
         display: flex;
         justify-content: center;
+        padding-top: 15px;
+    }
+}
+
+@media (max-width: 450px) {
+    .titulo-dados p {
+        font-size: 1.2rem;
+    }
+
+    input,select{
+        font-size: 12px !important;
+    }
+    .vscomp-value{
+        font-size: 12px !important;
+    }
+}
+
+@media (max-width: 360px) {
+    .div-dados-informacao p {
+        font-size: 1rem;
+    }
+    input,select{
+        font-size: 11px !important;
+    }
+    .vscomp-value{
+        font-size: 11px !important;
     }
 }
