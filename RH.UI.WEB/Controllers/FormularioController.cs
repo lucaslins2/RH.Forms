@@ -74,6 +74,10 @@ namespace RH.UI.WEB.Controllers
         public async Task<IActionResult> SalvarForm1(DadosPessoaisForm1 dadosPessoaisForm1) {
 
             //Pega id do usaurio no cookies
+            //if (!ModelState.IsValid)
+            //{
+            //    return Page();
+            //}
             var UserID = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
 
             DadosPessoaisForm1BLL DadosPessoaisForm1BLL = new DadosPessoaisForm1BLL();
@@ -90,20 +94,22 @@ namespace RH.UI.WEB.Controllers
 
             }
 
-            var claims = new List<Claim>()
+            if (!string.IsNullOrEmpty(dadosPessoaisForm1.nomecompleto))
+            {
+                var claims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Name, dadosPessoaisForm1.nomecompleto),
                     new Claim(ClaimTypes.Sid, UserID.ToString()),
                 };
 
-            var usuarioIdentidade = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            ClaimsPrincipal principal = new ClaimsPrincipal(usuarioIdentidade);
-            var props = new AuthenticationProperties();
-
+                var usuarioIdentidade = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                ClaimsPrincipal principal = new ClaimsPrincipal(usuarioIdentidade);
+                var props = new AuthenticationProperties();
+          
 
 
             await HttpContext.SignInAsync(principal, props);
-
+            }
             return RedirectToAction("Index", "Home");
         
         }

@@ -26,6 +26,11 @@ namespace RH.BLL
         
         }
 
+        public int? VerificarDadosPessoaisForm1(int id) {
+
+            return _DadosPessoaisForm1DAL.VerificarDadosPessoais( id);
+        }
+
 
     }
 }

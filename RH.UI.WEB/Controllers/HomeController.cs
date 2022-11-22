@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using RH.BLL;
+using RH.Models;
 using RH.UI.WEB.Models;
 using System;
 using System.Collections.Generic;
@@ -23,7 +25,13 @@ namespace RH.UI.WEB.Controllers
 
         public IActionResult Index()
         {
-          //  ViewBag.Nome = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Name).Value;
+            //  ViewBag.Nome = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Name).Value;
+
+            DadosPessoaisForm1BLL dadosPessoaisForm1BLL = new DadosPessoaisForm1BLL();
+            var UserID = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
+            ViewBag.IdUsuarioDadosPessoais = dadosPessoaisForm1BLL.VerificarDadosPessoaisForm1(int.Parse(UserID));
+          
+
             return View();
         }
 

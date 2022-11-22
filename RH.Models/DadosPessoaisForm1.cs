@@ -49,7 +49,8 @@ namespace RH.Models
         public string estado { get; set; }
         public string categoriaString { get; set; }
         public Endereco endereco { get; set; }
-}
+        public int salvar { get; set; }
+    }
 
 
 

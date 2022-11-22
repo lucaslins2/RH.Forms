@@ -241,5 +241,38 @@ namespace RH.DAL
             return lista;
         }
 
+        public int? TransformaReaderEmListaDeObjetosIdUsuario(MySqlDataReader reader)
+        {
+            int? idUsuario;
+
+            while (reader.Read())
+            {
+                idUsuario = StringParaInt(reader["IdUsuario"].ToString());
+                return idUsuario;
+            };
+
+            return 0;
+
+        }
+
+
+
+        public int? VerificarDadosPessoais(int idUsuario) {
+
+            string sql = "SELECT idUsuario FROM dadospessoais WHERE idUsuario = " + idUsuario;
+
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = sql;
+
+            using (conexao = new Conexao(null))
+            {
+                var retornoDr = conexao.ExecutaComandoComRetornoSdr(cmd);
+                return TransformaReaderEmListaDeObjetosIdUsuario(retornoDr);
+            }
+
+
+        }
     }
 }
