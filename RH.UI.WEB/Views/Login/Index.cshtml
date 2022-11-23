@@ -14,7 +14,7 @@
                 <div class="input-field">
                     <i class="fas fa-user"></i>
                     <input type="text" name="nome" placeholder="Cpf ou Email" />
-                
+                  
                 </div>
                 <div class="input-field">
                     <i class="fas fa-lock"></i>
@@ -27,23 +27,26 @@
                 <h2 class="title">Cadastrar-se</h2>
                 <div class="input-field">
                     <i class="fas fa-user"></i>
-                    <input type="text" name="cpf" placeholder="CPF" />
+                    <input type="text" name="cpf" placeholder="CPF" pattern="[[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}" required />
                 </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
                 <div class="input-field">
                     <i class="fas fa-user"></i>
-                   <input type="text" name="nome" placeholder="Nome" />
+                    <input type="text" name="nome" placeholder="Nome" required />
                 </div>
                 <div class="input-field">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" asp-for="email" placeholder="Email" />
+                    <input type="email" asp-for="email" placeholder="Email" required />
                 </div>
+                <span id="tituloSenha"></span>
+                <span id="legendaSenha"></span>
                 <div class="input-field">
                     <i class="fas fa-lock"></i>
-                    <input type="password" asp-for="senha"  placeholder="Senha" />
+                    <input type="password" asp-for="senha" placeholder="Senha" required />
                 </div>
-                <div class="input-field">
+
+                <div class="input-field" id="spanConfimaSenha">
                     <i class="fas fa-lock"></i>
-                    <input type="password" name="ConfirmarSenha" placeholder="Confirmar Senha" />
+                    <input type="password" name="confirmaSenha" placeholder="Confirmar Senha" required />
                 </div>
                 <input type="submit" class="btn" value="Cadastrar-se" />
             </form>

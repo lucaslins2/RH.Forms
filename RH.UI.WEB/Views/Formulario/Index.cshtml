@@ -3,7 +3,7 @@
 
 
 <link rel="stylesheet" href="../css/estiloForm.css">
-
+<link rel=""></link>
 @*<div class="container h-100">
     <div class="div-dados-informacao">
         <a href="home"><img class="img-icon" src="../img/seta-lado.png" alt=""></a>
@@ -363,10 +363,26 @@
                     <input type="text" asp-for="endereco.estado" class="form-control" id="estado" placeholder="Insira o estado">
                 </div>
             </div>
-
-            <div class="d-flex flex-column align-items-end justify-content-end w-100 h-100 div-from-end">
-                <input type="submit" href="#" class="btn button-end btn-lg btn-from-end" value="Salvar"/>
+            <div class="div-dados-informacao">
+                <p>Empregos Anteriores</p>
             </div>
+            <input id="contadorEmpregos" type="hidden" value="0">
+            <div id="empregosAnteriores">
+            </div>
+
+            <div class="d-flex flex-row w-100 div-responsivo" id="divBtn">
+                <div type="button" class="d-flex align-items-center flex-row icon" onclick="addEmpregoAntigo()">
+                    <img src="../img/mais.png" alt="" width="48px" height="48px">
+                    <p>Adicionar uma nova experiencia</p>
+                </div>
+            </div>
+            <div class="d-flex flex-column align-items-end justify-content-end w-100 h-100 div-from-end">
+                <input type="submit" href="#" class="btn button-end btn-lg btn-from-end" value="Salvar" />
+            </div>
+
+         @*   <div class="d-flex flex-column align-items-end justify-content-end w-100 h-100 div-from-end">
+                <input type="submit" href="#" class="btn button-end btn-lg btn-from-end" value="Salvar"/>
+            </div>*@
         </form>
     </div>
  </div>

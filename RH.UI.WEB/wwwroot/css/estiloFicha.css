@@ -1,4 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+/* Works on Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #3390F1 #E5E5EA;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 9px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #E5E5EA;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #3390F1;
+    border-radius: 20px;
+    border: 1px solid #E5E5EA;
+}
+
+.scroll {
+    overflow-y: scroll;
+}
 body{
     height: calc(100vh - 80px);
     font-family: "Poppins", sans-serif;
@@ -58,7 +83,7 @@ body{
     padding-left: 5rem;
 }
 
-@media (max-width: 850px) {
+@media (max-width: 1285px) {
     .div-container-card {
         flex-direction: column !important;
     }

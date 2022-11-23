@@ -7,8 +7,12 @@
 }
 
 body,
-input {
+input,span {
   font-family: "Poppins", sans-serif;
+}
+
+span#legendaSenha,span#tituloSenha{
+  font-size: 14px;
 }
 
 .container {
@@ -415,3 +419,12 @@ form.sign-in-form {
     left: 50%;
   }
 }
+
+@media (max-width: 485px) {
+  span#legendaSenha {
+    font-size: 12px;
+  }
+  span#tituloSenha {
+    font-size: 12px;
+  }
+  }

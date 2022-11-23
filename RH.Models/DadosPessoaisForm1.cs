@@ -50,6 +50,18 @@ namespace RH.Models
         public string categoriaString { get; set; }
         public Endereco endereco { get; set; }
         public int salvar { get; set; }
+
+        public List<string> empresa { get; set; }
+        public List<string> telefoneEmpresa { get; set; }
+        public List<string> contato { get; set; }
+        public List<string> setor { get; set; }
+        public List<string> cargoExercido { get; set; }
+        public List<string> enderecoEmpresa { get; set; }
+        public List<DateTime> dataAdmissao { get; set; }
+        public List<DateTime> dataDemissao { get; set; }
+        public List<string> motivoSaida { get; set; }
+        public List<int> QtdExp { get; set; }
+  
     }
 
 

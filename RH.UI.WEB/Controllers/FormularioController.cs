@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System;
 
 namespace RH.UI.WEB.Controllers
 {
@@ -66,7 +67,7 @@ namespace RH.UI.WEB.Controllers
             var DadosPessoaisForm1 = DadosPessoaisForm1BLL.GetDadosPessoaisForm1(int.Parse(UserID));
 
             //DadosPessoaisForm1.categoriasCNH = new List<string> {"A","B","C" };           // dadosPessoaisForm1.idCargo = 2;
-      
+                
             return View(DadosPessoaisForm1);
         }
 
@@ -83,6 +84,28 @@ namespace RH.UI.WEB.Controllers
             DadosPessoaisForm1BLL DadosPessoaisForm1BLL = new DadosPessoaisForm1BLL();
             var DadosPessoaisForm1 = DadosPessoaisForm1BLL.GetDadosPessoaisForm1(int.Parse(UserID));
             int Resultado = 0;
+            List<ExperienciaAnterior> experienciaAnteriores = new List<ExperienciaAnterior>();
+            foreach (int number in dadosPessoaisForm1.QtdExp)
+            {
+                ExperienciaAnterior experienciaAnterior = new ExperienciaAnterior
+                {
+                    empresa = dadosPessoaisForm1.empresa[number],
+                    telefoneEmpresa = dadosPessoaisForm1.telefoneEmpresa[number],
+                    contato = dadosPessoaisForm1.contato[number],
+                    setor = dadosPessoaisForm1.setor[number],
+                    cargoExercido = dadosPessoaisForm1.cargoExercido[number],
+                    enderecoEmpresa = dadosPessoaisForm1.enderecoEmpresa[number],
+                    dataAdmissao = dadosPessoaisForm1.dataAdmissao[number],
+                    dataDemissao = dadosPessoaisForm1.dataDemissao[number],
+                    motivoSaida = dadosPessoaisForm1.motivoSaida[number],
+                };
+            }
+            dadosPessoaisForm1.ExperienciaAnteriores = experienciaAnteriores;//ExperienciaAnteriores
+            //var gp = dadosPessoaisForm1.empresa.SelectMany(x => DadosPessoaisForm1.dataAdmissao, DadosPessoaisForm1.telefoneEmpresa, dadosPessoaisForm1.contato, dadosPessoaisForm1.setor,
+            //    dadosPessoaisForm1.cargoExercido, dadosPessoaisForm1.enderecoEmpresa, dadosPessoaisForm1.dataAdmissao, dadosPessoaisForm1.dataDemissao,
+            //    dadosPessoaisForm1.motivoSaida).Select(x => new { Empresa = x.Empresa, Qtd = x.Sum(y => y.Qtd) });
+
+
             if (DadosPessoaisForm1 != null) {
 
                Resultado =  DadosPessoaisForm1BLL.CadastrarDadosPessoaisForm1(dadosPessoaisForm1, int.Parse(UserID), 2);
