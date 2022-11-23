@@ -31,6 +31,7 @@ function addEmpregoAntigo() {
                         <div class="w-100 p-3">
                             <label for="empresa" class="form-label">Empresa:</label>
                             <input type="text" class="form-control" id="empresa" name="empresa[${contadorEmpregosAntigos}]" placeholder="Insira a empresa">
+                            <input type="hidden" name="idExperienciaAnterior[${contadorEmpregosAntigos}]">
                         </div>
                         <div class="w-100 p-3">
                             <label for="telefoneEmpresa" class="form-label">Telefone:</label>
@@ -74,8 +75,8 @@ function addEmpregoAntigo() {
                     <div class="d-flex flex-row justify-content-between w-100 div-responsivo">
                         <div class="w-50 p-3 input-responsivo">
                             <label for="motivoSaida" class="form-label">Motivo da Saída:</label>
-                            <input type="text" class="form-control" id="motivoSaida" name="motivoSaida[${contadorEmpregosAntigos}] placeholder="Insira o motivo da saída">
-                            <input type="hidden" name="QtdExp[${contadorEmpregosAntigos}]">
+                            <input type="text" class="form-control" id="motivoSaida" name="motivoSaida[${contadorEmpregosAntigos}]" placeholder="Insira o motivo da saída">
+                            <input type="hidden" name="QtdExp[${contadorEmpregosAntigos}]" value="${contadorEmpregosAntigos}">
                         </div>
                     </div>
                 `
@@ -112,11 +113,11 @@ function removeEmpregoAntigo() {
             node.parentNode.removeChild(node);
         }
 
-        if (contadorEmpregosAntigos > 1) {
-            if (node2.parentNode) {
-                node2.parentNode.removeChild(node2);
-            }
-        }
+        //if (contadorEmpregosAntigos > 1) {
+        //    if (node2.parentNode) {
+        //        node2.parentNode.removeChild(node2);
+        //    }
+        //}
 
         if (contadorEmpregosAntigos - 1 == 0) {
             if (btnRemover.parentNode) {

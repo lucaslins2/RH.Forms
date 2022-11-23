@@ -51,17 +51,18 @@ namespace RH.Models
         public Endereco endereco { get; set; }
         public int salvar { get; set; }
 
-        public List<string> empresa { get; set; }
-        public List<string> telefoneEmpresa { get; set; }
-        public List<string> contato { get; set; }
-        public List<string> setor { get; set; }
-        public List<string> cargoExercido { get; set; }
-        public List<string> enderecoEmpresa { get; set; }
-        public List<DateTime> dataAdmissao { get; set; }
-        public List<DateTime> dataDemissao { get; set; }
-        public List<string> motivoSaida { get; set; }
-        public List<int> QtdExp { get; set; }
-  
+        public List<int?> idExperienciaAnterior { get; set; } = new List<int?>();
+        public List<string> empresa { get; set; } = new List<string?>();
+        public List<string> telefoneEmpresa { get; set; } = new List<string?>();
+        public List<string> contato { get; set; } = new List<string?>();
+        public List<string> setor { get; set; } = new List<string?>();
+        public List<string> cargoExercido { get; set; } = new List<string?>();
+        public List<string> enderecoEmpresa { get; set; } = new List<string?>();
+        public List<DateTime?> dataAdmissao { get; set; } = new List<DateTime?>();
+        public List<DateTime?> dataDemissao { get; set; } = new List<DateTime?>();
+        public List<string> motivoSaida { get; set; } = new List<string>();
+        public List<int> QtdExp { get; set; } = new List<int>();
+
     }
 
 

@@ -15,11 +15,75 @@ namespace RH.DAL
         private Conexao conexao;
         public int CadastrarExperienciasAnterior(List<ExperienciaAnterior> experienciaAnteriores, int idUsuario)
         {
+            int rows = 0;
+           
 
-            return 0;
+            foreach (var exp in experienciaAnteriores)
+            {
+   
+                string sql = " INSERT INTO  empregosantigos (idUsuario ,empresa ,telefone ,contato ,setor ,cargo ,endereco,dataAdmissao,dataDemissao, motivoDemissao) " +
+                 "                 VALUES (@IdUsuario ,@empresa ,@telefone ,@contato ,@setor ,@cargo ,@endereco,@dataAdmissao,@dataDemissao,@motivoDemissao );";
+   
+
+                //if (exp.idExperienciaAnterior == null ||  exp.idExperienciaAnterior ==0)
+                //{
+
+                //    sql += " INSERT INTO  empregosantigos (idUsuario ,empresa ,telefone ,contato ,setor ,cargo ,endereco,dataAdmissao,dataDemissao, motivoDemissao) " +
+                //        "                 VALUES (@IdUsuario ,@empresa ,@telefone ,@contato ,@setor ,@cargo ,@endereco,@dataAdmissao,@dataDemissao,@motivoDemissao );";
+
+                //}
+                //else
+                //{
+
+                //    sql = " UPDATE empregosantigos SET empresa  = @empresa , telefone  = @telefone , contato  = @contato , setor  = @setor ,cargo = @cargo, endereco = @endereco,dataAdmissao=@dataAdmissao,dataDemissao=@dataDemissao," +
+                //        " motivoDemissao=@motivoDemissao WHERE IdUsuario  = @IdUsuario AND id= @id; ";
+                //}
+
+                MySqlCommand cmd = new MySqlCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sql;
+                cmd.Parameters.AddWithValue("@IdUsuario", idUsuario);
+                cmd.Parameters.AddWithValue("@empresa", exp.empresa);
+                cmd.Parameters.AddWithValue("@telefone", exp.telefoneEmpresa);
+                cmd.Parameters.AddWithValue("@contato", exp.contato);
+                cmd.Parameters.AddWithValue("@setor", exp.setor);
+                cmd.Parameters.AddWithValue("@cargo", exp.cargoExercido);
+                cmd.Parameters.AddWithValue("@endereco", exp.enderecoEmpresa);
+                cmd.Parameters.AddWithValue("@dataAdmissao", exp.dataAdmissao);
+                cmd.Parameters.AddWithValue("@dataDemissao", exp.dataDemissao);
+                cmd.Parameters.AddWithValue("@motivoDemissao", exp.motivoSaida);
+                //if (exp.idExperienciaAnterior > 0)
+                //    cmd.Parameters.AddWithValue("@id", exp.idExperienciaAnterior);
+
+                using (conexao = new Conexao(null))
+                {
+                    rows += conexao.ExecutaComando(cmd);
+
+                    // return TransformaReaderEmListaDeObjetosExpAnterior(retornoDr).FirstOrDefault();
+                }
+
+
+
+            }
+
+
+            return rows;
         }
+        public int DeletarExperienciasAnterior(int idUsuario) {
+            string sql = " DELETE  FROM empregosantigos WHERE idUsuario = " + idUsuario + " AND  id>0;";
 
-        public ExperienciaAnterior GetEnderecoIdUsuario(int idUsuario)
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = sql;
+            using (conexao = new Conexao(null))
+            {
+              return  conexao.ExecutaComando(cmd);
+
+                // return TransformaReaderEmListaDeObjetosExpAnterior(retornoDr).FirstOrDefault();
+            }
+
+        }
+        public ExperienciaAnterior GetEnderecoIdUsuario(int idUsuario, int IdExperiencia)
         {
             string sql = "SELECT id, idUsuario, empresa, telefone, contato, setor, cargo, endereco, dataAdmissao, dataDemissao, motivoDemissao FROM empregosantigos WHERE idUsuario = " + idUsuario;
 
@@ -31,6 +95,23 @@ namespace RH.DAL
             {
                 var retornoDr = conexao.ExecutaComandoComRetornoSdr(cmd);
                 return TransformaReaderEmListaDeObjetosExpAnterior(retornoDr).FirstOrDefault();
+            }
+
+
+        }
+
+           public List<ExperienciaAnterior> GetExperienciasAnteriores(int idUsuario)
+        {
+            string sql = "SELECT id, idUsuario, empresa, telefone, contato, setor, cargo, endereco, dataAdmissao, dataDemissao, motivoDemissao FROM empregosantigos WHERE idUsuario = " + idUsuario;
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = sql;
+
+            using (conexao = new Conexao(null))
+            {
+                var retornoDr = conexao.ExecutaComandoComRetornoSdr(cmd);
+                return TransformaReaderEmListaDeObjetosExpAnterior(retornoDr);
             }
 
 

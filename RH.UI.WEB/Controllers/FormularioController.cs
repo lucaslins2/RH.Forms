@@ -11,6 +11,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System;
+using RH.DAL;
 
 namespace RH.UI.WEB.Controllers
 {
@@ -66,8 +67,36 @@ namespace RH.UI.WEB.Controllers
             DadosPessoaisForm1BLL DadosPessoaisForm1BLL = new DadosPessoaisForm1BLL();
             var DadosPessoaisForm1 = DadosPessoaisForm1BLL.GetDadosPessoaisForm1(int.Parse(UserID));
 
+            ExperienciaAnteriorDAL experienciaAnteriorDAL = new ExperienciaAnteriorDAL();
+            var ListaExperiencia = experienciaAnteriorDAL.GetExperienciasAnteriores(int.Parse(UserID));
+            if (ListaExperiencia.Count > 0)
+            {
+                int contador = 0;
+                foreach (var lista in ListaExperiencia)
+                {
+                    contador++;
+                    DadosPessoaisForm1.idExperienciaAnterior.Add(lista.idExperienciaAnterior);
+                    DadosPessoaisForm1.empresa.Add(lista.empresa);
+                    DadosPessoaisForm1.telefoneEmpresa.Add(lista.telefoneEmpresa);
+                    DadosPessoaisForm1.contato.Add(lista.contato);
+                    DadosPessoaisForm1.setor.Add(lista.setor);
+                    DadosPessoaisForm1.cargoExercido.Add(lista.cargoExercido);
+                    DadosPessoaisForm1.enderecoEmpresa.Add(lista.enderecoEmpresa);
+                    DadosPessoaisForm1.dataAdmissao.Add(lista.dataAdmissao);
+                    DadosPessoaisForm1.dataDemissao.Add(lista.dataDemissao);
+                    DadosPessoaisForm1.motivoSaida.Add(lista.motivoSaida);
+                    DadosPessoaisForm1.QtdExp.Add(contador - 1);
+
+                }
+
+
+            }
+
+            if(DadosPessoaisForm1 == null)
+                DadosPessoaisForm1 = new DadosPessoaisForm1();
+
             //DadosPessoaisForm1.categoriasCNH = new List<string> {"A","B","C" };           // dadosPessoaisForm1.idCargo = 2;
-                
+
             return View(DadosPessoaisForm1);
         }
 
@@ -85,27 +114,55 @@ namespace RH.UI.WEB.Controllers
             var DadosPessoaisForm1 = DadosPessoaisForm1BLL.GetDadosPessoaisForm1(int.Parse(UserID));
             int Resultado = 0;
             List<ExperienciaAnterior> experienciaAnteriores = new List<ExperienciaAnterior>();
+            if (dadosPessoaisForm1.QtdExp != null) {
             foreach (int number in dadosPessoaisForm1.QtdExp)
             {
-                ExperienciaAnterior experienciaAnterior = new ExperienciaAnterior
-                {
-                    empresa = dadosPessoaisForm1.empresa[number],
-                    telefoneEmpresa = dadosPessoaisForm1.telefoneEmpresa[number],
-                    contato = dadosPessoaisForm1.contato[number],
-                    setor = dadosPessoaisForm1.setor[number],
-                    cargoExercido = dadosPessoaisForm1.cargoExercido[number],
-                    enderecoEmpresa = dadosPessoaisForm1.enderecoEmpresa[number],
-                    dataAdmissao = dadosPessoaisForm1.dataAdmissao[number],
-                    dataDemissao = dadosPessoaisForm1.dataDemissao[number],
-                    motivoSaida = dadosPessoaisForm1.motivoSaida[number],
-                };
+                ExperienciaAnterior experienciaAnterior = new ExperienciaAnterior();
+
+                if (dadosPessoaisForm1.idExperienciaAnterior.Count >= number && dadosPessoaisForm1.idExperienciaAnterior.Count>0)
+                experienciaAnterior.idExperienciaAnterior = dadosPessoaisForm1.idExperienciaAnterior[number];
+                else experienciaAnterior.idExperienciaAnterior = 0;
+
+                if (dadosPessoaisForm1.empresa.Count >= number+1 && dadosPessoaisForm1.empresa.Count > 0)
+                    experienciaAnterior.empresa = dadosPessoaisForm1.empresa[number];
+
+                if (dadosPessoaisForm1.telefoneEmpresa.Count >= number+1 && dadosPessoaisForm1.telefoneEmpresa.Count > 0)
+                    experienciaAnterior.telefoneEmpresa = dadosPessoaisForm1.telefoneEmpresa[number];
+
+                if (dadosPessoaisForm1.contato.Count >= number+1 && dadosPessoaisForm1.contato.Count > 0)
+                    experienciaAnterior.contato = dadosPessoaisForm1.contato[number];
+
+                if (dadosPessoaisForm1.setor.Count >= number+1 && dadosPessoaisForm1.setor.Count > 0)
+                    experienciaAnterior.setor = dadosPessoaisForm1.setor[number];
+
+                if (dadosPessoaisForm1.cargoExercido.Count >= number+1 && dadosPessoaisForm1.cargoExercido.Count > 0)
+                    experienciaAnterior.cargoExercido = dadosPessoaisForm1.cargoExercido[number];
+
+                if (dadosPessoaisForm1.enderecoEmpresa.Count >= number+1 && dadosPessoaisForm1.enderecoEmpresa.Count > 0)
+                    experienciaAnterior.enderecoEmpresa = dadosPessoaisForm1.enderecoEmpresa[number];
+
+                if (dadosPessoaisForm1.dataAdmissao.Count >= number+1 && dadosPessoaisForm1.dataAdmissao.Count > 0)
+                    experienciaAnterior.dataAdmissao = dadosPessoaisForm1.dataAdmissao[number];
+
+                if (dadosPessoaisForm1.dataDemissao.Count >= number+1 && dadosPessoaisForm1.dataDemissao.Count > 0)
+                    experienciaAnterior.dataDemissao = dadosPessoaisForm1.dataDemissao[number];
+
+                if (dadosPessoaisForm1.motivoSaida.Count >= number+1 && dadosPessoaisForm1.motivoSaida.Count > 0)
+                    experienciaAnterior.motivoSaida = dadosPessoaisForm1.motivoSaida[number];
+
+                experienciaAnteriores.Add(experienciaAnterior);
             }
-            dadosPessoaisForm1.ExperienciaAnteriores = experienciaAnteriores;//ExperienciaAnteriores
-            //var gp = dadosPessoaisForm1.empresa.SelectMany(x => DadosPessoaisForm1.dataAdmissao, DadosPessoaisForm1.telefoneEmpresa, dadosPessoaisForm1.contato, dadosPessoaisForm1.setor,
-            //    dadosPessoaisForm1.cargoExercido, dadosPessoaisForm1.enderecoEmpresa, dadosPessoaisForm1.dataAdmissao, dadosPessoaisForm1.dataDemissao,
-            //    dadosPessoaisForm1.motivoSaida).Select(x => new { Empresa = x.Empresa, Qtd = x.Sum(y => y.Qtd) });
-
-
+            }
+            ExperienciaAnteriorBLL experienciaAnteriorBLL = new ExperienciaAnteriorBLL();
+            if (experienciaAnteriores.Count > 0)
+            {
+                experienciaAnteriorBLL.DeletarExperienciasAnterior(int.Parse(UserID));
+                experienciaAnteriorBLL.CadastrarExperienciasAnterior(experienciaAnteriores, int.Parse(UserID)); 
+           
+            }
+            else
+                experienciaAnteriorBLL.DeletarExperienciasAnterior(int.Parse(UserID));
+  
             if (DadosPessoaisForm1 != null) {
 
                Resultado =  DadosPessoaisForm1BLL.CadastrarDadosPessoaisForm1(dadosPessoaisForm1, int.Parse(UserID), 2);
