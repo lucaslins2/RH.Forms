@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 22-Nov-2022 às 03:29
+-- Tempo de geração: 25-Nov-2022 às 03:51
 -- Versão do servidor: 10.4.25-MariaDB
 -- versão do PHP: 7.4.30
 
@@ -78,6 +78,13 @@ CREATE TABLE `dadospessoais` (
   `fotoPerfil` mediumblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `dadospessoais`
+--
+
+INSERT INTO `dadospessoais` (`id`, `idUsuario`, `nomePai`, `nomeMae`, `idEstadoCivil`, `nomeEsposa`, `dataNascimento`, `numeroDependentes`, `naturalidade`, `nacionalidade`, `idGrauDeEstudo`, `celular`, `telefoneFixo`, `rg`, `dataExpedicao`, `orgaoExpedidor`, `certidaoDeReservista`, `carteiraDeTrabalho`, `carteiraDeTrabalhoSerie`, `titulo`, `zona`, `secao`, `idUF`, `cnh`, `categoriasCNH`, `validadeCNH`, `validadePrimeiraCNH`, `idCargo`, `fotoPerfil`) VALUES
+(4, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -114,6 +121,13 @@ CREATE TABLE `endereco` (
   `cidade` varchar(100) DEFAULT NULL,
   `estado` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `endereco`
+--
+
+INSERT INTO `endereco` (`id`, `idUsuario`, `rua`, `numero`, `bairro`, `cep`, `cidade`, `estado`) VALUES
+(4, 6, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -173,8 +187,18 @@ INSERT INTO `graudeestudo` (`id`, `descricaoGrauDeEstudo`) VALUES
 CREATE TABLE `perguntas` (
   `idPergunta` int(11) NOT NULL,
   `descricao` varchar(255) NOT NULL,
-  `peso` tinyint(4) NOT NULL
+  `peso` tinyint(4) NOT NULL,
+  `idCargo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `perguntas`
+--
+
+INSERT INTO `perguntas` (`idPergunta`, `descricao`, `peso`, `idCargo`) VALUES
+(1, 'Voce Mora no Brasil?', 1, 1),
+(2, 'Voce Mora no Japao?', 1, 1),
+(3, 'Qual sua Altura?', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -188,6 +212,15 @@ CREATE TABLE `perguntausuario` (
   `idUsuario` int(11) NOT NULL,
   `repostaAlternativa` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `perguntausuario`
+--
+
+INSERT INTO `perguntausuario` (`id`, `idPergunta`, `idUsuario`, `repostaAlternativa`) VALUES
+(1, 1, 6, 2),
+(2, 2, 6, 1),
+(3, 3, 6, 2);
 
 -- --------------------------------------------------------
 
@@ -248,6 +281,14 @@ CREATE TABLE `usuario` (
   `senha` varchar(255) NOT NULL,
   `admin` bit(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `usuario`
+--
+
+INSERT INTO `usuario` (`id`, `cpf`, `nome`, `email`, `senha`, `admin`) VALUES
+(5, '423.232.321-12', '22', 'sadada@asdasd', 'adsad2', b'0'),
+(6, '473.434.768-90', '', 'Lucas@gmail.com', 'Lu*12345678', b'0');
 
 --
 -- Índices para tabelas despejadas
@@ -338,7 +379,7 @@ ALTER TABLE `cargo`
 -- AUTO_INCREMENT de tabela `dadospessoais`
 --
 ALTER TABLE `dadospessoais`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `empregosantigos`
@@ -350,7 +391,7 @@ ALTER TABLE `empregosantigos`
 -- AUTO_INCREMENT de tabela `endereco`
 --
 ALTER TABLE `endereco`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `estadocivil`
@@ -371,10 +412,22 @@ ALTER TABLE `graudeestudo`
   MODIFY `id` tinyint(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT de tabela `perguntas`
+--
+ALTER TABLE `perguntas`
+  MODIFY `idPergunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de tabela `perguntausuario`
+--
+ALTER TABLE `perguntausuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restrições para despejos de tabelas
@@ -410,8 +463,7 @@ ALTER TABLE `formularios`
 -- Limitadores para a tabela `perguntausuario`
 --
 ALTER TABLE `perguntausuario`
-  ADD CONSTRAINT `perguntasUsuario_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `perguntasUsuario_ibfk_2` FOREIGN KEY (`idPergunta`) REFERENCES `perguntas` (`idPergunta`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `perguntasUsuario_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
