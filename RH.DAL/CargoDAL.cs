@@ -4,6 +4,7 @@ using RH.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 
 namespace RH.DAL
@@ -28,6 +29,23 @@ namespace RH.DAL
            
         }
 
+
+        public Cargo GetCargo( int IdCargo)
+        {
+
+            string sql = "SELECT idCargo, Descricao NomeCargo FROM cargo WHERE idCargo = "+ IdCargo;
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = sql;
+
+            using (conexao = new Conexao(null))
+            {
+                var retornoDr = conexao.ExecutaComandoComRetornoSdr(cmd);
+                return TransformaReaderEmListaDeObjetosCargo(retornoDr).FirstOrDefault();
+            }
+
+        }
         public List<Cargo> TransformaReaderEmListaDeObjetosCargo(MySqlDataReader reader)
         {
 

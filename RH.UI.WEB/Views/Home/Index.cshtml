@@ -1,7 +1,11 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
     Layout = "_Layout";
-   // @ViewBag.IdUsuarioDadosPessoais>0
+    string active = "";
+
+    if (ViewBag.IdUsuarioDadosPessoais > 0)
+        active = "-active";
+
 }
 <link rel="stylesheet" href="~/css/estiloFicha.css">
 
@@ -22,10 +26,12 @@
             
             <div class="px-5">
                 <div type="button" class="d-flex flex-column align-items-center div-card">
-                    <div class="div-form-icon">
+                    <div class="div-form-icon@(active)">
                         <img class="img-icon" src="../img/baixar-seta.png" width="64" height="64" alt="">
                     </div>
+                    <a href="Questao/?id=1">
                     <p>Candidaturas</p>
+                    </a>
                 </div>
             </div>
 

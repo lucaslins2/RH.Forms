@@ -1,0 +1,76 @@
+﻿@using Microsoft.AspNetCore.Html;
+@using RH.Models
+@model List<Pergunta>
+@{
+}
+<link rel="stylesheet" href="../css/estiloForm.css">
+
+<input id="contadorEmpregos" type="hidden" value="0">
+<div class="container-fluid h-100">
+    <div class="div-dados-informacao container-fluid titulo-dados">
+        <a href="ficha"><img class="img-icon" src="../img/seta-lado.png" alt=""></a>
+        <p>Questionario - @DateTime.Now.ToString("dd/MM/yyyy")</p>
+    </div>
+
+    <div class="container-fluid h-100 scroll">
+        <form asp-action="Salvar" method="post">
+            <div class="div-dados-informacao">
+                <p>@ViewBag.nomeCargo</p>
+            </div>
+
+            @{
+                int contador = 0;
+                int totalista = Model.Count();
+                string Divflex = "<div class=\"d-flex flex-row justify-content-between w-100 div-responsivo\">";
+                string Div = "</div>";
+            }
+
+            @foreach (var perguntas in Model)
+              {
+
+
+                if (perguntas.idpergunta % 2 != 0)
+                {
+                    @(new HtmlString(Divflex))
+                   
+                }
+                <div class="w-100 p-3">
+                    <label for="pergunta1" class="form-label">@perguntas.descricao</label>
+                    <input type="hidden" asp-for="@Model[contador].idpergunta">
+                    <select class="form-select" asp-for="@Model[contador].reposta" aria-label="pergunta1">
+                        <option selected>Selecione uma opção</option>
+                        <option value="2">Sim</option>
+                        <option value="1">Não</option>
+                    </select>
+                </div>
+                <input type="hidden" asp-for="@Model[contador].idReposta">
+
+                //<div class="w-100 p-3">
+                //    <label for="pergunta2" class="form-label">@pergunta.descricao</label>
+                //    <select class="form-select" aria-label="pergunta2">
+                //        <option selected>Selecione uma opção</option>
+                //        <option value="1">Sim</option>
+                //        <option value="0">Não</option>
+                //    </select>
+                //</div>
+                contador++;
+                if (perguntas.idpergunta % 2 == 0 || contador == totalista)
+                {
+                    if (contador == totalista)
+                    {
+                        <div class="w-100 p-3">
+                        </div>
+                    }
+                    @(new HtmlString(Div))
+
+                }
+
+               
+            }
+
+            <div class="d-flex flex-column align-items-end justify-content-end w-100 h-100 div-from-end">
+                <input type="submit" href="#" class="btn button-end btn-lg btn-from-end" value="Salvar"/>
+            </div>
+        </form>
+    </div>
+</div>

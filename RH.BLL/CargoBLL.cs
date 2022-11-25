@@ -19,7 +19,11 @@ namespace RH.BLL
 
             return _CargoDAL.GetCargos();
         }
-       
+        public Cargo GetCargo(int id) {
+
+
+            return _CargoDAL.GetCargo(id);
+        }
 
 
     }

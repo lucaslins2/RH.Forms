@@ -87,7 +87,7 @@ namespace RH.UI.WEB
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
                 endpoints.MapFallback(context => {
-                    context.Response.Redirect("Home");
+                    context.Response.Redirect("../Home");
                     return Task.CompletedTask;
                 });
             });
