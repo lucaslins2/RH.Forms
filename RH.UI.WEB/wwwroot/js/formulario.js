@@ -35,7 +35,7 @@ function addEmpregoAntigo() {
                         </div>
                         <div class="w-100 p-3">
                             <label for="telefoneEmpresa" class="form-label">Telefone:</label>
-                            <input type="text" class="form-control" id="telefoneEmpresa" name="telefoneEmpresa[${contadorEmpregosAntigos}]" placeholder="Insira o número de telefone">
+                            <input type="text" class="form-control" id="telefoneEmpresa" name="telefoneEmpresa[${contadorEmpregosAntigos}]" placeholder="Insira o nÃºmero de telefone">
                         </div>
                     </div>
 
@@ -56,26 +56,26 @@ function addEmpregoAntigo() {
                             <input type="text" class="form-control" id="cargoExercido" name="cargoExercido[${contadorEmpregosAntigos}]" placeholder="Insira o cargo que exerceu">
                         </div>
                         <div class="w-100 p-3">
-                            <label for="enderecoEmpresa" class="form-label">Endereço da Empresa:</label>
-                            <input type="text" class="form-control" id="enderecoEmpresa" name="enderecoEmpresa[${contadorEmpregosAntigos}]" placeholder="Insira o endereço da empresa">
+                            <label for="enderecoEmpresa" class="form-label">EndereÃ§o da Empresa:</label>
+                            <input type="text" class="form-control" id="enderecoEmpresa" name="enderecoEmpresa[${contadorEmpregosAntigos}]" placeholder="Insira o endereÃ§o da empresa">
                         </div>
                     </div>
 
                     <div class="d-flex flex-row justify-content-between w-100 div-responsivo">
                         <div class="w-100 p-3">
-                            <label for="dataAdmissao" class="form-label">Data de Admissão:</label>
+                            <label for="dataAdmissao" class="form-label">Data de AdmissÃ£o:</label>
                             <input type="date" class="form-control" id="dataAdmissao" name="dataAdmissao[${contadorEmpregosAntigos}]">
                         </div>
                         <div class="w-100 p-3">
-                            <label for="dataDemissao" class="form-label">Data de Demissão:</label>
+                            <label for="dataDemissao" class="form-label">Data de DemissÃ£o:</label>
                             <input type="date" class="form-control" id="dataDemissao" name="dataDemissao[${contadorEmpregosAntigos}]">
                         </div>
                     </div>
 
                     <div class="d-flex flex-row justify-content-between w-100 div-responsivo">
                         <div class="w-50 p-3 input-responsivo">
-                            <label for="motivoSaida" class="form-label">Motivo da Saída:</label>
-                            <input type="text" class="form-control" id="motivoSaida" name="motivoSaida[${contadorEmpregosAntigos}]" placeholder="Insira o motivo da saída">
+                            <label for="motivoSaida" class="form-label">Motivo da SaÃ­da:</label>
+                            <input type="text" class="form-control" id="motivoSaida" name="motivoSaida[${contadorEmpregosAntigos}]" placeholder="Insira o motivo da saÃ­da">
                             <input type="hidden" name="QtdExp[${contadorEmpregosAntigos}]" value="${contadorEmpregosAntigos}">
                         </div>
                     </div>
@@ -97,7 +97,7 @@ function addEmpregoAntigo() {
         let heightPage = document.getElementsByClassName("scroll")[0];
         heightPage.scrollTo(0, heightPage.scrollHeight);
     } else {
-        alertaPadraoAviso("Você so pode adicionar 3 experiencias");
+        alertaPadraoAviso("VocÃª so pode adicionar 3 experiencias");
     }
 }
 
@@ -128,7 +128,7 @@ function removeEmpregoAntigo() {
 
         contadorEmpregosAntigos--;
     } else {
-        alertaPadraoAviso("Não existem experiencias para serem removidas");
+        alertaPadraoAviso("NÃ£o existem experiencias para serem removidas");
     }
 }
 
