@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -7,10 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RH.UI.WEB.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace RH.UI.WEB
@@ -35,11 +38,26 @@ namespace RH.UI.WEB
                         options.LoginPath = "/Login/Index";
 
                     });
-            services.Configure<CookieTempDataProviderOptions>(options => {
+            services.Configure<CookieTempDataProviderOptions>(options =>
+            {
                 options.Cookie.IsEssential = true;
             });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllersWithViews();
+
+            services.AddAuthorization(options =>
+            {
+                //options.AddPolicy("Admin", policy => policy.RequireClaim(ClaimTypes.Role, "Admin"));
+                options.AddPolicy("Admistrator", policy => policy.RequireAssertion(context => context.User.HasClaim(c =>
+                c.Value == "admin" && c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")));
+                options.AddPolicy("User", policy => policy.RequireAssertion(context => context.User.HasClaim(c =>
+              c.Value == "public" && c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")));
+                //  (c.Type == "BadgeId" || c.Type == "TemporaryBadgeId")
+                // && c.Issuer == "https://microsoftsecurity")));
+
+            });
+          
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -86,14 +104,15 @@ namespace RH.UI.WEB
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                endpoints.MapFallback(context => {
+                endpoints.MapFallback(context =>
+                {
                     context.Response.Redirect("../Home");
                     return Task.CompletedTask;
                 });
             });
 
 
-      
+
         }
     }
 }

@@ -38,12 +38,24 @@ namespace RH.UI.WEB.Controllers
 
             }
             if(usuario!=null) {
-
-                var claims = new List<Claim>()
+                var claims = new List<Claim>();
+                if (usuario.admin == 1)
                 {
-                    new Claim(ClaimTypes.Name, usuario.nome),
-                    new Claim(ClaimTypes.Sid, usuario.IdUsuario.ToString()),
-                };
+                    // claims.Add(new Claim("Store", "Admin"));
+                    claims.Add(new Claim(ClaimTypes.Name, usuario.nome));
+                    claims.Add(new Claim(ClaimTypes.Role, "admin"));
+                    claims.Add(new Claim(ClaimTypes.Sid, usuario.IdUsuario.ToString()));
+
+                }
+                else {
+
+                    claims.Add(new Claim(ClaimTypes.Name, usuario.nome));
+                    claims.Add(new Claim(ClaimTypes.Role, "public"));
+                    claims.Add(new Claim(ClaimTypes.Sid, usuario.IdUsuario.ToString()));
+
+                }
+            
+          
 
                 var usuarioIdentidade = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 ClaimsPrincipal principal = new ClaimsPrincipal(usuarioIdentidade);
@@ -52,8 +64,12 @@ namespace RH.UI.WEB.Controllers
 
 
                 await HttpContext.SignInAsync(principal, props);
-               // var userId = HttpContext.User.Claims.
-                return RedirectToAction("Index","Home");  
+                // var userId = HttpContext.User.Claims.
+                if (usuario.admin == 1)
+                {
+                    return RedirectToAction("Index", "Painel");
+                }
+                    return RedirectToAction("Index","Home");  
             
             }
 

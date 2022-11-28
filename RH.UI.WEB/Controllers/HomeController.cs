@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace RH.UI.WEB.Controllers
 {
-    [Authorize]
+    [Authorize(Policy ="User")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -42,7 +42,7 @@ namespace RH.UI.WEB.Controllers
 
             return View();
         }
-
+        [Authorize(Policy = "Admistrator")]
         public IActionResult Privacy()
         {
             return View();

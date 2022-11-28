@@ -16,7 +16,7 @@ namespace RH.Models
         [Required(ErrorMessage = "a senha é obrigatório")]
         public string senha { get; set; }
      
-        public byte admin { get; set; } 
+        public int admin { get; set; } 
        
             
 }

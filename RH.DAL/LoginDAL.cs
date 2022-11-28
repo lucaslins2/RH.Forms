@@ -13,7 +13,7 @@ namespace RH.DAL
       
         public Usuario GetLogin ( string usuario, string senha){
 
-            var sql = "SELECT id, cpf,nome,email,  senha " +
+            var sql = "SELECT id, cpf,nome,email,  senha, admin " +
          " FROM usuario" +
         "  WHERE senha = @senha AND cpf = @usuario OR email = @usuario ";
 
@@ -42,8 +42,8 @@ namespace RH.DAL
                         nome = retornoDr["nome"].ToString(),
                         email = retornoDr["email"].ToString(),
                         senha = retornoDr["senha"].ToString(),
-                       
-                    //    admin = Byte.Parse(retornoDr["Admin"].ToString()),
+                        admin = int.Parse(retornoDr["admin"].ToString()),
+                        //    admin = Byte.Parse(retornoDr["Admin"].ToString()),
                     };
                 } 
             }
