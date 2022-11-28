@@ -9,20 +9,20 @@ sign_up_btn.addEventListener("click", () => {
 sign_in_btn.addEventListener("click", () => {
     container.classList.remove("sign-up-mode");
 });
-
-$("input[name=cpf]").mask("999.999.999-99");
-
+//validacao com mascara 
+/*$("input[name=cpf]").mask("999.999.999-99");*/
+$("input[name=cpf]").mask("99999999999");
 var senha = document.getElementsByName("senha")[1];
 var spanSenha = document.getElementById("spanSenha");
 var spanConfimaSenha = document.getElementById("spanConfimaSenha");
 var confirmaSenha = document.getElementsByName("confirmaSenha")[0];
 
-const digito = new RegExp(/(?=.*\d)/);              // deve conter ao menos um dígito
-const minusculo = new RegExp(/(?=.*[a-z])/);        // deve conter ao menos uma letra minúscula
-const maiusculo = new RegExp(/(?=.*[A-Z])/);        // deve conter ao menos uma letra maiúscula
-const especial = new RegExp(/(?=.*[$*&@#])/);       // deve conter ao menos um caractere especial
-const tamanho = new RegExp(/[0-9a-zA-Z$*&@#]{8,}/); // deve conter ao menos 8 dos caracteres mencionados
-
+const digito = new RegExp(/(?=.*\d)/);              // deve conter ao menos um dÃ­gito
+const minusculo = new RegExp(/(?=.*[a-zA-Z])/);        // deve conter ao menos uma letra minÃºscula
+/*const maiusculo = new RegExp(/(?=.*[A-Z])/);        // deve conter ao menos uma letra maiÃºscula*/
+/*const especial = new RegExp(/(?=.*[$*&@#])/);  */     // deve conter ao menos um caractere especial
+/*const tamanho = new RegExp(/[0-9a-zA-Z$*&@#]{8,}/); // deve conter ao menos 8 dos caracteres mencionados*/
+const tamanho = new RegExp(/[0-9a-zA-Z]{8,}/); // deve conter ao menos 8 dos caracteres mencionados
 
 function Login() {
 
@@ -56,13 +56,13 @@ function validarSenha() {
         arrayValidador.push(2);
     };
 
-    if (maiusculo.exec(senha.value) == null) {
-        arrayValidador.push(3);
-    };
+    //if (maiusculo.exec(senha.value) == null) {
+    //    arrayValidador.push(3);
+    //};
 
-    if (especial.exec(senha.value) == null) {
-        arrayValidador.push(4);
-    };
+    //if (especial.exec(senha.value) == null) {
+    //    arrayValidador.push(4);
+    //};
 
     if (tamanho.exec(senha.value) == null) {
         arrayValidador.push(5);
@@ -81,17 +81,17 @@ function validarSenha() {
 
         switch (arrayValidador[0]) {
             case 1:
-                document.getElementById("legendaSenha").innerHTML = "A senha deve conter ao menos \n um dígito";
+                document.getElementById("legendaSenha").innerHTML = "A senha deve conter ao menos \n um dÃ­gito";
                 return false;
                 break;
 
             case 2:
-                document.getElementById("legendaSenha").innerHTML = "Uma letra minúscula";
+                document.getElementById("legendaSenha").innerHTML = "Uma letra";
                 return false;
                 break;
 
             case 3:
-                document.getElementById("legendaSenha").innerHTML = "Uma letra maiúscula";
+                document.getElementById("legendaSenha").innerHTML = "Uma letra maiÃºscula";
                 return false;
                 break;
 

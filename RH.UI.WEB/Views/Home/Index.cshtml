@@ -2,9 +2,24 @@
     ViewData["Title"] = "Home Page";
     Layout = "_Layout";
     string active = "";
+    string SelectCargos = "";
+    string onlickBack = "";
 
     if (ViewBag.IdUsuarioDadosPessoais > 0)
+    { 
         active = "-active";
+         onlickBack = "onclick=selecionarVaga()";
+
+     
+        foreach (var item in ViewBag.cargos)
+        {
+            SelectCargos += "'" + item.idCargo + "':'" + item.cargo + "',";
+
+        
+        }
+        SelectCargos = SelectCargos.Remove(SelectCargos.Length - 1);
+    
+    }
 
 }
 <link rel="stylesheet" href="~/css/estiloFicha.css">
@@ -16,7 +31,7 @@
         <div class="d-flex flex-row align-items-between div-container-card">
 
             <div class="px-5">
-                <div type="button" class="d-flex flex-column align-items-center div-card">
+                <div type="button" class="d-flex flex-column align-items-center div-card" onclick="abrirDadosPessoais()">
                     <div class="div-form-icon-active">
                         <img class="img-icon" src="../img/baixar-seta.png" width="64" height="64" alt="">
                     </div>
@@ -25,13 +40,13 @@
             </div>
             
             <div class="px-5">
-                <div type="button" class="d-flex flex-column align-items-center div-card">
+                <div type="button" class="d-flex flex-column align-items-center div-card" @onlickBack>
                     <div class="div-form-icon@(active)">
-                        <img class="img-icon" src="../img/baixar-seta.png" width="64" height="64" alt="">
+                        <img class="img-icon" src="../img/baixar-seta.png" width="64" height="64" alt=""  />
                     </div>
-                    <a href="Questao/?id=1">
+                 @*   <a href="Questao/?id=1">*@
                     <p>Candidaturas</p>
-                    </a>
+                @*    </a>*@
                 </div>
             </div>
 
@@ -46,10 +61,52 @@
 
         </div>
 
-        <div class="d-flex flex-column align-items-end justify-content-end w-100 h-100 div-from-end p-3">
+    @*    <div class="d-flex flex-column align-items-end justify-content-end w-100 h-100 div-from-end p-3">
             <a type="button" href="formulario" class="btn button-end btn-lg btn-from-end">Próximo</a>
-        </div>
+        </div>*@
 
     </div>
 
 </div>
+
+<script>
+    function abrirDadosPessoais(){
+
+        window.location.replace("formulario");
+    
+    }
+    function selecionarVaga() {
+
+
+        Swal.fire({
+            title: 'Vagas',
+            input: 'select',
+            //Isso aqui você pode passar um array pro java script se preferir
+            inputOptions: {
+          @Html.Raw(SelectCargos)
+                //'1': 'Vaga 1',
+                //'2': 'Vaga 2',
+                //'3': 'Vaga 3'
+            },
+            inputPlaceholder: 'Selecione uma vaga',
+            showCancelButton: true,
+            confirmButtonText: 'Selecionar',
+            cancelButtonText: 'Voltar',
+            confirmButtonColor: '#3390F1',
+            cancelButtonColor: '#6D6D6F',
+            inputValidator: function(value) {
+                return new Promise(function(resolve, reject) {
+                    if (value !== '') {
+                        resolve();
+                    } else {
+                        resolve('Nenhuma vaga selecionada');
+                    }
+                });
+            }
+        }).then(function(result) {
+            if (result.isConfirmed) {
+                                    window.location.replace("Questao?id=" + result.value);
+            }
+        });
+    }
+</script>

@@ -29,8 +29,16 @@ namespace RH.UI.WEB.Controllers
 
             DadosPessoaisForm1BLL dadosPessoaisForm1BLL = new DadosPessoaisForm1BLL();
             var UserID = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
-            ViewBag.IdUsuarioDadosPessoais = dadosPessoaisForm1BLL.VerificarDadosPessoaisForm1(int.Parse(UserID));
-          
+           int? validadadospessoais  = dadosPessoaisForm1BLL.VerificarDadosPessoaisForm1(int.Parse(UserID));
+            ViewBag.IdUsuarioDadosPessoais = validadadospessoais;
+            CargoBLL cargoBLL = new CargoBLL();
+
+
+            if (validadadospessoais > 0) {
+                List<Cargo> cargos = cargoBLL.GetCargosBLL();
+                ViewBag.cargos = cargos;
+            }
+     
 
             return View();
         }
