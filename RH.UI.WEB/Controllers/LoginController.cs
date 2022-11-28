@@ -76,7 +76,7 @@ namespace RH.UI.WEB.Controllers
             {
                 Usuario usuarios = new Usuario();
                 LoginBLL loginBLL = new LoginBLL();
-                usuarios.cpf = login.cpf;
+                usuarios.cpf = login.cpf.Replace(".", "").Replace("-","");
                 usuarios.nome = login.nome;
                 usuarios.senha = login.senha;
                 usuarios.email = login.email;

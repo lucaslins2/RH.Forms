@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 25-Nov-2022 às 03:51
+-- Tempo de geração: 28-Nov-2022 às 03:35
 -- Versão do servidor: 10.4.25-MariaDB
 -- versão do PHP: 7.4.30
 
@@ -78,13 +78,6 @@ CREATE TABLE `dadospessoais` (
   `fotoPerfil` mediumblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Extraindo dados da tabela `dadospessoais`
---
-
-INSERT INTO `dadospessoais` (`id`, `idUsuario`, `nomePai`, `nomeMae`, `idEstadoCivil`, `nomeEsposa`, `dataNascimento`, `numeroDependentes`, `naturalidade`, `nacionalidade`, `idGrauDeEstudo`, `celular`, `telefoneFixo`, `rg`, `dataExpedicao`, `orgaoExpedidor`, `certidaoDeReservista`, `carteiraDeTrabalho`, `carteiraDeTrabalhoSerie`, `titulo`, `zona`, `secao`, `idUF`, `cnh`, `categoriasCNH`, `validadeCNH`, `validadePrimeiraCNH`, `idCargo`, `fotoPerfil`) VALUES
-(4, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -121,13 +114,6 @@ CREATE TABLE `endereco` (
   `cidade` varchar(100) DEFAULT NULL,
   `estado` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `endereco`
---
-
-INSERT INTO `endereco` (`id`, `idUsuario`, `rua`, `numero`, `bairro`, `cep`, `cidade`, `estado`) VALUES
-(4, 6, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -213,15 +199,6 @@ CREATE TABLE `perguntausuario` (
   `repostaAlternativa` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Extraindo dados da tabela `perguntausuario`
---
-
-INSERT INTO `perguntausuario` (`id`, `idPergunta`, `idUsuario`, `repostaAlternativa`) VALUES
-(1, 1, 6, 2),
-(2, 2, 6, 1),
-(3, 3, 6, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -281,14 +258,6 @@ CREATE TABLE `usuario` (
   `senha` varchar(255) NOT NULL,
   `admin` bit(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `usuario`
---
-
-INSERT INTO `usuario` (`id`, `cpf`, `nome`, `email`, `senha`, `admin`) VALUES
-(5, '423.232.321-12', '22', 'sadada@asdasd', 'adsad2', b'0'),
-(6, '473.434.768-90', '', 'Lucas@gmail.com', 'Lu*12345678', b'0');
 
 --
 -- Índices para tabelas despejadas
@@ -363,7 +332,8 @@ ALTER TABLE `perguntausuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `cpf` (`cpf`);
+  ADD UNIQUE KEY `cpf` (`cpf`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
@@ -427,7 +397,7 @@ ALTER TABLE `perguntausuario`
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restrições para despejos de tabelas
