@@ -23,7 +23,7 @@
 
 }
 <link rel="stylesheet" href="~/css/estiloFicha.css">
-
+<input id="ErroMesage" value="@ViewBag.Message" type="hidden">
 <div class="container h-100">
     <div class="d-flex flex-column align-items-center h-100">
         <p class="p-titulo">Selecione uma opção</p>
@@ -109,4 +109,24 @@
             }
         });
     }
+
+
+    function ErroCargo() {
+
+        let $LoginModal = $("#ErroMesage").val();
+
+        if ($LoginModal == 1) {
+
+            alertaPadraoErro("Cargo ja foi aplicado");
+
+        }
+        //if ($LoginModal == 2) {
+
+        //    alertaPadraoSucesso("Registrado com Sucesso!");
+
+        //}
+
+    }
+    ErroCargo();
+
 </script>

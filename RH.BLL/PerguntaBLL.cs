@@ -23,5 +23,12 @@ namespace RH.BLL
         return _PerguntaDAL.SalvarReposta(list, idUsuario);
         
         }
+
+
+        public int SalvarVagar(int idUsuario, int idCargo)
+        {
+
+            return _PerguntaDAL.SalvarVaga(idUsuario, idCargo);
+        }
     }
 }

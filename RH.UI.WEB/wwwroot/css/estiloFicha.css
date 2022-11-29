@@ -30,6 +30,10 @@ body{
     font-size: 1rem;
       
 }
+.swal2-popup{
+    border-radius: 25px!important;
+}
+
 .p-titulo {
     font-size: 2rem;
     color: #6D6D6F;

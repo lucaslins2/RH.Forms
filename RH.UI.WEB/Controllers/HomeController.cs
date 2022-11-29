@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace RH.UI.WEB.Controllers
 {
-    [Authorize(Policy ="User")]
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -26,19 +26,30 @@ namespace RH.UI.WEB.Controllers
         public IActionResult Index()
         {
             //  ViewBag.Nome = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Name).Value;
+            var admin = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Role).Value;
+            string UserIda = "";
+            if(admin=="admin")
+              UserIda=  HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
+
 
             DadosPessoaisForm1BLL dadosPessoaisForm1BLL = new DadosPessoaisForm1BLL();
             var UserID = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
            int? validadadospessoais  = dadosPessoaisForm1BLL.VerificarDadosPessoaisForm1(int.Parse(UserID));
+
             ViewBag.IdUsuarioDadosPessoais = validadadospessoais;
             CargoBLL cargoBLL = new CargoBLL();
 
+            var Onj = TempData["erroCargo"];
+            if (Onj != null)
+                ViewBag.Message = TempData["erroCargo"].ToString();
 
             if (validadadospessoais > 0) {
-                List<Cargo> cargos = cargoBLL.GetCargosBLL();
+                List<Cargo> cargos = cargoBLL.GetCargosBLL(!String.IsNullOrEmpty(UserIda)? int.Parse(UserIda): 0);
                 ViewBag.cargos = cargos;
             }
-     
+         
+
+
 
             return View();
         }

@@ -6,18 +6,28 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-
+using static RH.DAL.FuncoesDAL;
 namespace RH.DAL
 {
     public class CargoDAL
     {
        private Conexao conexao = null;
-        public List<Cargo> GetCargos()
+        public List<Cargo> GetCargos(int Usuario)
         {
+            string sql = "";
+            if (Usuario > 0)
+            {
+                sql = " SELECT c.idCargo, c.Descricao NomeCargo, fr.id idvaga  FROM cargo c" +
+                      " INNER JOIN formularios fr ON fr.idCargo = c.idCargo " +
+                      " WHERE fr.idUsuario = " + Usuario;
+            }
+            else {
 
-            string sql = "SELECT idCargo, Descricao NomeCargo FROM cargo";
+                sql = "  SELECT c.idCargo, c.Descricao NomeCargo, fr.id idvaga  FROM cargo c" +
+                         " LEFT JOIN formularios fr ON fr.idCargo = c.idCargo ";
 
-            MySqlCommand cmd = new MySqlCommand();
+            }
+             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = sql;
 
@@ -33,7 +43,9 @@ namespace RH.DAL
         public Cargo GetCargo( int IdCargo)
         {
 
-            string sql = "SELECT idCargo, Descricao NomeCargo FROM cargo WHERE idCargo = "+ IdCargo;
+            string sql = "   SELECT c.idCargo, c.Descricao NomeCargo, fr.id idvaga  FROM cargo c" +
+                         " LEFT JOIN formularios fr ON fr.idCargo = c.idCargo " +
+                         " WHERE c.idCargo = " + IdCargo;
 
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandType = CommandType.Text;
@@ -57,7 +69,7 @@ namespace RH.DAL
                 {
                     idCargo = int.Parse(reader["idCargo"].ToString()),
                     cargo = reader["NomeCargo"].ToString(),
-
+                    idvaga = StringParaInt(reader["idvaga"].ToString()),
                 };
                 lista.Add(tmpObjeto);
             }

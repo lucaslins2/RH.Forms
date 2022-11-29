@@ -56,7 +56,7 @@ namespace RH.DAL
 
          
             int rows = 0;
-        foreach(var pergunta in lista)
+           foreach(var pergunta in lista)
             {
                 string sql = "";
 
@@ -93,10 +93,29 @@ namespace RH.DAL
                 }
 
             }
-
+       
             return rows;
 
         }
+        public int SalvarVaga(int idUsuario, int IdCargo) {
+
+            string sql = " INSERT INTO formularios (idUsuario, idCargo, Status) VALUES( @idUsuario,@idCargo, @Status) ";
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = sql;
+            cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
+            cmd.Parameters.AddWithValue("@idCargo", IdCargo);
+            cmd.Parameters.AddWithValue("@Status", IdCargo);
+
+            using (conexao = new Conexao(null))
+            {
+
+                return conexao.ExecutaComando(cmd);
+            }
+        }
+
+
+
 
     }
 }

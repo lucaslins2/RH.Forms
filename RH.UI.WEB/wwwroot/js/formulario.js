@@ -11,7 +11,27 @@ $('#telefoneEmpresa').mask('0000-0000', {
         $('#telefoneEmpresa').mask(mask, options);
     }
 });
+function DisableInput() {
+    let admin = $('#AdminDisable').val();
+    $('#btnAdmin').hide();
+    if (admin == 1) {
+    var inputs = document.getElementsByTagName("INPUT");
+    for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i].type !== 'submit' && inputs[i].type !== 'hidden') {
+            inputs[i].disabled = true;
+        }
 
+        }
+        var selects = document.getElementsByTagName("SELECT");
+        for (var i = 0; i < selects.length; i++) {
+            if (selects[i].id != "categoriasCNH") {
+                selects[i].disabled = true;
+            }
+        }
+    }
+
+}
+DisableInput();
 
 
 var contadorEmpregosAntigos = document.getElementById('contadorEmpregos').value;
@@ -232,8 +252,10 @@ function CarregaSelect() {
         $("#categoriaString").val(this.value);
 
     });
+    let admin = $('#AdminDisable').val();
+    if(admin == 1)
+        document.querySelector('.multipleSelect').disable();
 
-    
 
 }
 setTimeout(CarregaSelect, 500);

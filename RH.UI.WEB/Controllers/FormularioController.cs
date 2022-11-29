@@ -20,10 +20,13 @@ namespace RH.UI.WEB.Controllers
         [Authorize]
         public IActionResult Index()
         {
+            var admin = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Role).Value;
+            if (admin == "admin")
+                ViewBag.Admin = 1;//se o usuario for administrador disablita os campos
 
             List<SelectListItem> itemsCargos = new List<SelectListItem>();
             CargoBLL cargoBLL = new CargoBLL();
-            var cargos = cargoBLL.GetCargosBLL();
+            var cargos = cargoBLL.GetCargosBLL(0);
             foreach (var item in cargos) {
                 itemsCargos.Add(new SelectListItem() { Text = item.cargo, Value = item.idCargo.ToString(), Selected = false });
             }
@@ -179,6 +182,7 @@ namespace RH.UI.WEB.Controllers
                 var claims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Name, dadosPessoaisForm1.nomecompleto),
+                    new Claim(ClaimTypes.Role, "public"),
                     new Claim(ClaimTypes.Sid, UserID.ToString()),
                 };
 

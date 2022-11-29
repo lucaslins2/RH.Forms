@@ -15,9 +15,9 @@ namespace RH.BLL
 
         }
 
-        public List<Cargo> GetCargosBLL() {
+        public List<Cargo> GetCargosBLL(int idUsuario ) {
 
-            return _CargoDAL.GetCargos();
+            return _CargoDAL.GetCargos(idUsuario);
         }
         public Cargo GetCargo(int id) {
 

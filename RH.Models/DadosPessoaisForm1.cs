@@ -71,7 +71,7 @@ namespace RH.Models
     public class Cargo {
         public int idCargo { get; set; }
         public string cargo { get; set; }
-
+        public int? idvaga { get; set; }
     }
     public class GraudeEstudo
     {

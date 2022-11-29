@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+
+/* Works on Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #3390F1 #E5E5EA;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 9px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #E5E5EA;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #3390F1;
+    border-radius: 20px;
+    border: 1px solid #E5E5EA;
+}
+body{
+    height: calc(100vh - 80px);
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+      
+}
+
+input{
+    border-radius: 10px !important;
+    height: 45px;
+    font-size: 15px !important;
+    box-shadow: -1px 3px 6px -2px rgba(0, 0, 0, 0.32);
+}
+
+.container-fluid {
+    width: calc(100% - 5%);
+    padding-bottom: 15px;
+}
+
+.table{
+    background-color: #3390F1;
+    border-start-end-radius: 45px;
+    border-start-start-radius: 45px;
+}
+
+.table thead th{
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 50px;
+}
+
+.table tbody tr{
+    background-color: #fff;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.linkCurriculo a{
+    color: #3390F1;
+    font-family: "Poppins", sans-serif;
+    text-decoration: none;
+}
+
+.nome{
+    color: #3390F1;
+    font-family: "Poppins", sans-serif;
+}

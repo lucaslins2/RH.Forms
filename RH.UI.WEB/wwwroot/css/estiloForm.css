@@ -46,7 +46,10 @@ select {
 
 .scroll {
     margin-top: 35px;
-    overflow-y: scroll;
+    overflow-y: auto;
+}
+.swal2-popup{
+    border-radius: 25px!important;
 }
 
 .div-upload-foto {

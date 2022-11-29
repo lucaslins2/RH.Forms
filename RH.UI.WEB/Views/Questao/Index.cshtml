@@ -2,9 +2,18 @@
 @using RH.Models
 @model List<Pergunta>
 @{
+    
+    string desabilitar = ""; 
+    
+    } 
+@if(ViewBag.Admin == 1)
+{
+
+    desabilitar = "disabled";
+
 }
 <link rel="stylesheet" href="../css/estiloForm.css">
-
+@*<link rel="stylesheet" href="../css/candiruas.css">*@
 <input id="contadorEmpregos" type="hidden" value="0">
 <div class="container-fluid h-100">
     <div class="div-dados-informacao container-fluid titulo-dados">
@@ -37,7 +46,7 @@
                 <div class="w-100 p-3">
                     <label for="pergunta1" class="form-label">@perguntas.descricao</label>
                     <input type="hidden" asp-for="@Model[contador].idpergunta">
-                    <select class="form-select" asp-for="@Model[contador].reposta" aria-label="pergunta1">
+                    <select class="form-select" asp-for="@Model[contador].reposta"  aria-label="pergunta1" required>
                         <option selected>Selecione uma opção</option>
                         <option value="2">Sim</option>
                         <option value="1">Não</option>
@@ -68,9 +77,21 @@
                
             }
 
+            <input type="hidden" name="idCargo" value="@ViewBag.idCargo">
+
             <div class="d-flex flex-column align-items-end justify-content-end w-100 h-100 div-from-end">
                 <input type="submit" href="#" class="btn button-end btn-lg btn-from-end" value="Salvar"/>
             </div>
         </form>
     </div>
 </div>
+
+<script>
+    var selects = document.getElementsByTagName("SELECT");
+    for (var i = 0; i < selects.length; i++) {
+       // if (selects[i].id != "categoriasCNH") {
+            selects[i].disabled = true;
+       // }
+    }
+
+</script>
