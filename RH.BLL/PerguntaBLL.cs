@@ -30,5 +30,12 @@ namespace RH.BLL
 
             return _PerguntaDAL.SalvarVaga(idUsuario, idCargo);
         }
+
+        public int AtualizarCanditados( int idvaga, int Status) {
+
+            return _PerguntaDAL.AtualizarCanditados(idvaga, Status);
+        }
+
+
     }
 }

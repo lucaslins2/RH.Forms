@@ -23,8 +23,8 @@ namespace RH.DAL
             }
             else {
 
-                sql = "  SELECT c.idCargo, c.Descricao NomeCargo, fr.id idvaga  FROM cargo c" +
-                         " LEFT JOIN formularios fr ON fr.idCargo = c.idCargo ";
+                sql = "  SELECT distinct c.idCargo, c.Descricao NomeCargo, null idvaga  FROM cargo c";
+                        // " LEFT JOIN formularios fr ON fr.idCargo = c.idCargo ";
 
             }
              MySqlCommand cmd = new MySqlCommand();

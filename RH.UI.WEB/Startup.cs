@@ -106,7 +106,13 @@ namespace RH.UI.WEB
 
                 endpoints.MapFallback(context =>
                 {
-                    context.Response.Redirect("../Home");
+                    // context.User.Claims.ToList()
+                   string teste = context.User.Claims.First(c => c.Type == ClaimTypes.Role).Value;
+                    if (teste == "admin")
+                        context.Response.Redirect("../Painel");
+                    else
+                        context.Response.Redirect("../Home");
+
                     return Task.CompletedTask;
                 });
             });

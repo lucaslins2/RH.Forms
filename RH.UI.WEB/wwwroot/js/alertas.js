@@ -18,3 +18,26 @@ function alertaPadraoErro(pText){
         timer: 2500
       })
 }
+
+function AlertaConfrima(pText, btnCanditado) {
+    Swal.fire({
+        title: pText,
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: 'Sim',
+        denyButtonText: `Não`,
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            //Swal.fire('Aprovado!', '', 'success')
+            setTimeout(btnCanditado.click()
+                , 1000);
+       
+
+        } else if (result.isDenied) {
+           Swal.fire('Cancelado', '', 'info')
+        }
+    })
+
+
+}

@@ -19,8 +19,22 @@ namespace RH.UI.WEB.Controllers
         {
 
             CanditadoBLL canditadoBLL = new CanditadoBLL();
+            CargoBLL cargoBLL = new CargoBLL();
+            var cargos = cargoBLL.GetCargosBLL(0);
+
+            ViewBag.cargos= cargos;
             var  listaCanditados= canditadoBLL.GetCanditados();
+            ViewBag.cidades = canditadoBLL.GetCidades();
             return View(listaCanditados);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Pesquisar([FromBody]Filtros filtros) {
+
+
+            CanditadoBLL canditadoBLL = new CanditadoBLL();
+            var listaCanditados = canditadoBLL.GetCanditadosPesquisa(filtros);
+            return View();
         }
 
         public async Task<IActionResult> Visualizar(int id) {

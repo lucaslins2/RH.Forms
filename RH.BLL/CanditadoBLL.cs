@@ -18,5 +18,15 @@ namespace RH.BLL
         public List<Canditado> GetCanditados() {
             return _CanditadoDAL.GetCanditados();
         }
+
+        public List<Canditado> GetCanditadosPesquisa(Filtros filtros)
+        {
+            return _CanditadoDAL.GetCanditadosPesquisa(filtros);
+        }
+        public List<Cidades> GetCidades() {
+
+            return _CanditadoDAL.GetCidades();
+        
+        }
     }
 }
