@@ -34,7 +34,7 @@ namespace RH.UI.WEB.Controllers
 
             CanditadoBLL canditadoBLL = new CanditadoBLL();
             var listaCanditados = canditadoBLL.GetCanditadosPesquisa(filtros);
-            return View();
+            return PartialView("_Lista", listaCanditados);
         }
 
         public async Task<IActionResult> Visualizar(int id) {

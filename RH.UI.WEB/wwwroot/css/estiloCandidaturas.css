@@ -198,3 +198,16 @@ input {
     opacity: 1 !important;
     font-family: "Poppins", sans-serif !important;
 }
+
+#fundo-carregando {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1090;
+    background-color: #cccccc;
+    background-color: rgba(50, 40, 30, 0.5);
+    color: #f2a600;
+    font-weight: bold;
+    cursor: progress;
+}

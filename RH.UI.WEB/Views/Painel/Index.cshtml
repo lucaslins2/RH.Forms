@@ -119,46 +119,47 @@
             </div>
             <input type="text" class="form-control mt-3 mb-3 filtro" id="Pesquisar" placeholder="Pesquisar por nome, e-mail, CPF ou telefone">
         </div>
-
-        <table class="table">
-            <thead thead class="titulo">
-                <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">CPF</th>
-                    <th scope="col">Telefone</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @*<tr>
-                        <td class="nome">José Felipe De França</td>
-                        <td>jose.felipe@gmail.com</td>
-                        <td>438.269.618-62</td>
-                        <td>11 99914-1990</td>
-                        <td class="linkCurriculo"><a href="">Ver mais</a></td>
-                    </tr>*@
-                @foreach (var item in Model)
-                {
+        <div id="conteudo-pesquisa">
+            <table class="table">
+                <thead thead class="titulo">
                     <tr>
-                        <td class="nome">@item.nome</td>
-                        <td>@item.email</td>
-                        <td>
-                            @Convert.ToUInt64(item.cpf).ToString(@"000\.000\.000\-00")
-                        </td>
-
-                        <td>@item.telefone</td>
-                        <td class="linkCurriculo"><a href="Painel/Visualizar?id=@item.idcantidado">Ver mais</a></td>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">CPF</th>
+                        <th scope="col">Telefone</th>
+                        <th scope="col"></th>
                     </tr>
-                }
+                </thead>
+                <tbody>
+                    @*<tr>
+                    <td class="nome">José Felipe De França</td>
+                    <td>jose.felipe@gmail.com</td>
+                    <td>438.269.618-62</td>
+                    <td>11 99914-1990</td>
+                    <td class="linkCurriculo"><a href="">Ver mais</a></td>
+                </tr>*@
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="nome">@item.nome</td>
+                            <td>@item.email</td>
+                            <td>
+                                @Convert.ToUInt64(item.cpf).ToString(@"000\.000\.000\-00")
+                            </td>
 
-            </tbody>
-            <thead class="footer">
-                <tr>
-                    <th colspan="5"></th>
-                </tr>
-            </thead>
-        </table>
+                            <td>@item.telefone</td>
+                            <td class="linkCurriculo"><a href="Painel/Visualizar?id=@item.idcantidado">Ver mais</a></td>
+                        </tr>
+                    }
+
+                </tbody>
+                <thead class="footer">
+                    <tr>
+                        <th colspan="5"></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
     </div>
 
 </div>

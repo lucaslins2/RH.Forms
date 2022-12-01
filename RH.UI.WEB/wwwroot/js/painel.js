@@ -47,7 +47,7 @@ function AtualizarTabela() {
         data: data,
         success: function (data) {
 
-         //   $('#conteudo-resultado-pesquisa-Retorno').html(data);
+        $('#conteudo-pesquisa').html(data);
             //var $tabela = "#TabelaRetorno";
             //if ($($tabela).length > 0)
             //    $("#btn-RetornoResultado").show();
