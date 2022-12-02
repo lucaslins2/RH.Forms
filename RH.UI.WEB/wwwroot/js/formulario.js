@@ -13,8 +13,9 @@ $('#telefoneEmpresa').mask('0000-0000', {
 });
 function DisableInput() {
     let admin = $('#AdminDisable').val();
-    $('#btnAdmin').hide();
+  
     if (admin == 1) {
+        $('#btnAdmin').hide();
     var inputs = document.getElementsByTagName("INPUT");
     for (var i = 0; i < inputs.length; i++) {
         if (inputs[i].type !== 'submit' && inputs[i].type !== 'hidden') {

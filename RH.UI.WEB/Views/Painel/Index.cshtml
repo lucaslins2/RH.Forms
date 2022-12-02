@@ -5,41 +5,175 @@
 <link rel="stylesheet" href="~/css/estiloCandidaturas.css">
 <div class="container-fluid h-100 scroll">
     <div class="d-flex flex-column align-items-center h-100">
-        <input type="text" class="form-control m-3" placeholder="Pesquisar por nome, e-mail, CPF ou telefone">
+        <div type="button" class="w-100 pesquisar">
+            <button type="submit" class="btnPesquisar"><img class="imgPesquisa" src="../img/lupa.png" alt="" srcset=""></button>
+            <img class="imgFiltro" id="imgFiltro" src="../img/filtro.png" alt="" srcset="" onclick="Mudarestado()">
+            <div class="divFiltro" id="filtro" style="display: none;">
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">CPF</th>
-                    <th scope="col">Telefone</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @*<tr>
-            <td class="nome">José Felipe De França</td>
-            <td>jose.felipe@gmail.com</td>
-            <td>438.269.618-62</td>
-            <td>11 99914-1990</td>
-            <td class="linkCurriculo"><a href="">Ver mais</a></td>
-        </tr>*@
-                @foreach (var item in Model) {
-                <tr>
-                    <td class="nome">@item.nome</td>
-                    <td>@item.email</td>
-                    <td>
-                        @Convert.ToUInt64(item.cpf).ToString(@"000\.000\.000\-00")
-                    </td>
+                <div class="w-100" id="accordion">
 
-                     <td>@item.telefone</td>
-                    <td class="linkCurriculo"><a href="Painel/Visualizar?id=@item.idcantidado">Ver mais</a></td>
-                </tr>
+                    <div class="card">
+                        <div data-bs-toggle="collapse" href="#collapseOne">
+                            <div class="divSubFiltro">
+                                <img src="../img/caixa-de-entrega.png" alt="" srcset="">
+                                <span>Cargo</span>
+                            </div>
+                        </div>
+                        <div id="collapseOne" class="collapse" data-bs-parent="#accordion">
+                            <div class="card-body">
+                                <!-- Cargo -->
+                                @foreach (var cargo in ViewBag.cargos)
+                                {
+
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input" name="idcargo" value="@cargo.idCargo" id="cargo@(cargo.idCargo)" />
+                                        <label class="form-check-label" for="cargo@(cargo.idCargo)">
+                                            @cargo.cargo
+                                        </label>
+                                        @*<input class="form-check-input" type="radio" name="flexRadioDefault" id="@cargo.idcargo">
+                                            <label class="form-check-label" for="cargo1">
+                                                Cargo 1
+                                            </label>*@
+                                    </div>
+
+                                }
+                                @*<div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="cargo1">
+                                        <label class="form-check-label" for="cargo1">
+                                            Cargo 1
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="cargo2">
+                                        <label class="form-check-label" for="cargo2">
+                                            cargo 2
+                                        </label>
+                                    </div>*@
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div data-bs-toggle="collapse" href="#collapseTwo">
+                            <div class="divSubFiltro">
+                                <img src="../img/limite-de-idade.png" alt="" srcset="">
+                                <span>Idade</span>
+                            </div>
+                        </div>
+                        <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
+                            <div class="card-body">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="0" id="maior18">
+                                    <label class="form-check-label" for="maior18">
+                                        Maior de 18 anos
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card">
+                        <div data-bs-toggle="collapse" href="#collapseThree">
+                            <div class="divSubFiltro">
+                                <img src="../img/casa.png" alt="" srcset="">
+                                <span>Cidade</span>
+                            </div>
+                        </div>
+                        <div id="collapseThree" class="collapse" data-bs-parent="#accordion">
+                            <div class="card-body">
+                                @foreach (var cidade in ViewBag.cidades)
+                                {
+
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input" name="idcidade" value="@cidade.cidade" id="cidade@(cidade.idcidade)" />
+                                        <label class="form-check-label" for="cargo@(cidade.idcidade)">
+                                            @cidade.cidade
+                                        </label>
+                                        @*<input class="form-check-input" type="radio" name="flexRadioDefault" id="@cargo.idcargo">
+                <label class="form-check-label" for="cargo1">
+                    Cargo 1
+                </label>*@
+                                    </div>
+
+                                }
+
+                                <!-- cidade -->
+                                @*<div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="cidade1">
+            <label class="form-check-label" for="cidade1">
+                Cidade 1
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="cidade2">
+            <label class="form-check-label" for="cidade2">
+                Cidade 2
+            </label>
+        </div>*@
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <input type="text" class="form-control mt-3 mb-3 filtro" id="Pesquisar" placeholder="Pesquisar por nome, e-mail, CPF ou telefone">
+        </div>
+        <div id="conteudo-pesquisa">
+            <table class="table">
+                <thead thead class="titulo">
+                    <tr>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">CPF</th>
+                        <th scope="col">Telefone</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @*<tr>
+                    <td class="nome">José Felipe De França</td>
+                    <td>jose.felipe@gmail.com</td>
+                    <td>438.269.618-62</td>
+                    <td>11 99914-1990</td>
+                    <td class="linkCurriculo"><a href="">Ver mais</a></td>
+                </tr>*@
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="nome">@item.nome</td>
+                            <td>@item.email</td>
+                            <td>
+                                @Convert.ToUInt64(item.cpf).ToString(@"000\.000\.000\-00")
+                            </td>
+
+                            <td>@item.telefone</td>
+                            <td class="linkCurriculo"><a href="Painel/Visualizar?id=@item.idcantidado">Ver mais</a></td>
+                        </tr>
                     }
 
-            </tbody>
-        </table>
+                </tbody>
+                <thead class="footer">
+                    <tr>
+                        <th colspan="5"></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
     </div>
 
 </div>
+<script>
+    function Mudarestado() {
+        let display = document.getElementById("filtro").style.display;
+
+        if (display == "none") {
+            document.getElementById("filtro").style.display = 'flex';
+            document.getElementById("imgFiltro").src = "../img/filtro-on.png";
+        } else {
+            document.getElementById("filtro").style.display = 'none';
+            document.getElementById("imgFiltro").src = "../img/filtro.png";
+        }
+    }
+</script>
+<script src="~/js/painel.js"></script>

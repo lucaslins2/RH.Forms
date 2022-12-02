@@ -105,7 +105,7 @@ namespace RH.DAL
             cmd.CommandText = sql;
             cmd.Parameters.AddWithValue("@idUsuario", idUsuario);
             cmd.Parameters.AddWithValue("@idCargo", IdCargo);
-            cmd.Parameters.AddWithValue("@Status", IdCargo);
+            cmd.Parameters.AddWithValue("@Status", 0);
 
             using (conexao = new Conexao(null))
             {
@@ -114,6 +114,26 @@ namespace RH.DAL
             }
         }
 
+
+        public int AtualizarCanditados(int idvaga, int status)
+        {
+
+            //string sql = " INSERT INTO formularios (idUsuario, idCargo, Status) VALUES( @idUsuario,@idCargo, @Status) ";
+            string sql = "UPDATE formularios SET Status = @Status WHERE id = @id";
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = sql;
+            cmd.Parameters.AddWithValue("@id", idvaga);
+           // cmd.Parameters.AddWithValue("@idCargo", IdCargo);
+            cmd.Parameters.AddWithValue("@Status", status);
+
+            using (conexao = new Conexao(null))
+            {
+
+                return conexao.ExecutaComando(cmd);
+            }
+        }
 
 
 
