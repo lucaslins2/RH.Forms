@@ -15,14 +15,22 @@ namespace RH.DAL
         public List<Canditado> GetCanditados()
         {
 
-            string sql = "  SELECT DISTINCT  u.id idcanditado, u.nome,u.email ,u.cpf," +
-                         "   CASE dp.celular  " +
-                         "    WHEN  '' then dp.telefoneFixo " +
-                         "    WHEN  null then dp.telefoneFixo" +
-                         "   END as telefone " +
-                         "  FROM usuario u " +
-                         "  INNER JOIN dadospessoais dp ON dp.idUsuario = u.id " +
-                         "  INNER JOIN formularios fr ON fr.idUsuario = u.id";
+            string sql = "  SELECT u.id idcanditado, u.nome,u.email ,u.cpf," +
+                         "   IFNULL(IF(dp.celular = " +
+                         "    '',dp.telefoneFixo,dp.celular),dp.telefoneFixo) AS telefone " +
+                         "    FROM usuario u " +
+                         "  INNER JOIN dadospessoais dp ON dp.idUsuario = u.id" +
+                         "  INNER JOIN formularios fr ON fr.idUsuario = u.id" +
+                         "  group by " +
+                         "  u.id"+
+                         " ,u.nome"+
+                         " ,u.email " +
+                         " ,u.cpf" +
+                         " ,dp.celular" +
+                         ",dp.telefoneFixo" +
+                         " ORDER BY" +
+                         " (SELECT SUM(repostaAlternativa) FROM perguntausuario " +
+                         " WHERE idUsuario = u.id);";
 
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandType = CommandType.Text;
