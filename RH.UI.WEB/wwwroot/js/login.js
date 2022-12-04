@@ -10,8 +10,8 @@ sign_in_btn.addEventListener("click", () => {
     container.classList.remove("sign-up-mode");
 });
 //validacao com mascara 
-/*$("input[name=cpf]").mask("999.999.999-99");*/
-$("input[name=cpf]").mask("99999999999");
+$("input[name=cpf]").mask("999.999.999-99");
+/*$("input[name=cpf]").mask("99999999999");*/
 var senha = document.getElementsByName("senha")[1];
 var spanSenha = document.getElementById("spanSenha");
 var spanConfimaSenha = document.getElementById("spanConfimaSenha");
@@ -128,8 +128,10 @@ function confirmarSenha() {
 
     if (confirmaSenha.value == senha.value && validarSenha()) {
         spanConfimaSenha.style.border = "2px solid green";
+        return true;
     } else {
         spanConfimaSenha.style.border = "2px solid red";
+        return false;
     }
 
 }
@@ -141,4 +143,17 @@ senha.addEventListener('input', (event) => {
 
 confirmaSenha.addEventListener('input', (event) => {
     confirmarSenha();
+});
+
+var formCadastro = document.getElementById("cadastrar");
+
+
+
+formCadastro.addEventListener('submit', function (evt) {
+    event.preventDefault();
+    if (validarSenha() && confirmarSenha()) {
+        formCadastro.submit();
+    } else {
+        alertaPadraoAviso("A senha não atende os requisitos minimos");
+    }
 });

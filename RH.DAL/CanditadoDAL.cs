@@ -100,14 +100,14 @@ namespace RH.DAL
                 if (!String.IsNullOrEmpty(Where))
                 {
                     var dataHj = DateTime.Now;
-                    dataHj.AddYears(-18);
-                    Where += " AND dp.dataNascimento <= " + dataHj.ToString("yyyy-MM-dd");
+                    dataHj = dataHj.AddYears(-18);
+                    Where += " AND dp.dataNascimento <= '" + dataHj.ToString("yyyy-MM-dd")+"'";
 
                 }
                 else {
                     var dataHj = DateTime.Now;
-                    dataHj.AddYears(-18);
-                    Where += " WHERE dp.dataNascimento <= " + dataHj.ToString("yyyy-MM-dd");
+                    dataHj = dataHj.AddYears(-18);
+                     Where += " WHERE dp.dataNascimento <= '" + dataHj.ToString("yyyy-MM-dd")+"'";
 
                 }
             }

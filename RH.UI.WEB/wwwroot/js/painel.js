@@ -3,16 +3,18 @@
 
 // Write your JavaScript code
 
-$('input[type=radio][name=idcargo]').change(function () {
+//$('input[type=radio][name=idcargo]').change(function () {
 
+//    //AtualizarTabela();
+//});
+
+//$('input[type=radio][name=idcidade]').change(function () {
+
+//   // AtualizarTabela();
+//});
+$('#maior18').click(function () {
     AtualizarTabela();
 });
-
-$('input[type=radio][name=idcidade]').change(function () {
-
-    AtualizarTabela();
-});
-
 
 function AtualizarTabela() {
 
@@ -25,6 +27,11 @@ function AtualizarTabela() {
 
     if (nomeCidade == undefined)
         nomeCidade = null;
+    if (pesquisar2 == undefined)
+        pesquisar2 = "";
+    if (idcargo2 == undefined)
+        idcargo2 = "0";
+
 
     obj =  {
 
@@ -85,4 +92,26 @@ function fecharCarregando() {
     }, 100); //200
     //exibeMsg();
     console.log('fecharCarregando');
+}
+
+
+$("input:radio").on("click", function (e) {
+    AtualizarTabela();
+    var inp = $(this); //cache the selector
+    if (inp.is(".theone")) { //see if it has the selected class
+        inp.prop("checked", false).removeClass("theone");
+        return;
+    }
+    $("input:radio[name='" + inp.prop("name") + "'].theone").removeClass("theone");
+    inp.addClass("theone");
+});
+
+
+function onkeyEnterSubmit(event) {
+
+
+    if (event.keyCode === 13) {
+
+    }
+
 }

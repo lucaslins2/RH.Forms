@@ -106,7 +106,7 @@ function addEmpregoAntigo() {
             var divBtn = document.getElementById("divBtn");
             divBtn.innerHTML += `
                 <div type="button" class="d-flex align-items-center flex-row icon" id="btnRemover" onclick="removeEmpregoAntigo()">
-                    <img src="../img/menos.png" alt="" width="48px" height="48px">
+                    <img src="../img/menos.png" alt="" width="32px" height="32px" style="margin-right: 5px; margin-left: 5px;"> 
                     <p>Remover uma nova experiencia</p>
                 </div>
             `
@@ -134,11 +134,11 @@ function removeEmpregoAntigo() {
             node.parentNode.removeChild(node);
         }
 
-        //if (contadorEmpregosAntigos > 1) {
-        //    if (node2.parentNode) {
-        //        node2.parentNode.removeChild(node2);
-        //    }
-        //}
+        if (contadorEmpregosAntigos > 1) {
+            if (node2.parentNode) {
+                node2.parentNode.removeChild(node2);
+            }
+        }
 
         if (contadorEmpregosAntigos - 1 == 0) {
             if (btnRemover.parentNode) {

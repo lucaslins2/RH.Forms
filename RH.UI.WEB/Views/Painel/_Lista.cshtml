@@ -2,7 +2,7 @@
 @model List<Canditado>;
 
 
-<table class="table">
+@*<table class="table">*@
     <thead thead class="titulo">
         <tr>
             <th scope="col">Nome</th>
@@ -22,16 +22,17 @@
             </tr>*@
         @foreach (var item in Model)
         {
-            <tr>
-                <td class="nome">@item.nome</td>
-                <td>@item.email</td>
-                <td>
-                    @Convert.ToUInt64(item.cpf).ToString(@"000\.000\.000\-00")
-                </td>
+        <tr>
+            <td data-label="Nome" class="linkCurriculo"><a href="#">@item.nome</a></td>
+            <td data-label="Email">@item.email</td>
+            <td data-label="CPF">
+                @Convert.ToUInt64(item.cpf).ToString(@"000\.000\.000\-00")
+            </td>
 
-                <td>@item.telefone</td>
-                <td class="linkCurriculo"><a href="Painel/Visualizar?id=@item.idcantidado">Ver mais</a></td>
-            </tr>
+            <td data-label="Telefone">@item.telefone</td>
+            <td class="linkCurriculo"><a href="Painel/Visualizar?id=@item.idcantidado">Ver mais</a></td>
+        </tr>
+
         }
 
     </tbody>
@@ -40,4 +41,4 @@
             <th colspan="5"></th>
         </tr>
     </thead>
-</table>
+@*</table>*@

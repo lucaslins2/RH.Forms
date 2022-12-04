@@ -19,6 +19,17 @@ function alertaPadraoErro(pText){
       })
 }
 
+function alertaPadraoAviso(pText) {
+    Swal.fire({
+        icon: 'warning',
+        timerProgressBar: true,
+        title: pText,
+        showConfirmButton: false,
+        showCloseButton: true,
+        timer: 2500
+    })
+}
+
 function AlertaConfrima(pText, btnCanditado) {
     Swal.fire({
         title: pText,

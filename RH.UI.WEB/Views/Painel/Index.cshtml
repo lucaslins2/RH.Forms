@@ -6,7 +6,7 @@
 <div class="container-fluid h-100 scroll">
     <div class="d-flex flex-column align-items-center h-100">
         <div type="button" class="w-100 pesquisar">
-            <button type="submit" class="btnPesquisar"><img class="imgPesquisa" src="../img/lupa.png" alt="" srcset=""></button>
+            <button type="submit" class="btnPesquisar" onclick="AtualizarTabela()"><img class="imgPesquisa" src="../img/lupa.png" alt="" srcset=""></button>
             <img class="imgFiltro" id="imgFiltro" src="../img/filtro.png" alt="" srcset="" onclick="Mudarestado()">
             <div class="divFiltro" id="filtro" style="display: none;">
 
@@ -117,10 +117,13 @@
 
                 </div>
             </div>
-            <input type="text" class="form-control mt-3 mb-3 filtro" id="Pesquisar" placeholder="Pesquisar por nome, e-mail, CPF ou telefone">
+            <input type="text" class="form-control mt-3 mb-3 filtro" id="Pesquisar"
+                   onkeydown="if (event.keyCode == 13) AtualizarTabela()"
+                        
+                   placeholder="Pesquisar por nome, e-mail, CPF ou telefone">
         </div>
-        <div id="conteudo-pesquisa">
-            <table class="table">
+
+            <table class="table" id="conteudo-pesquisa">
                 <thead thead class="titulo">
                     <tr>
                         <th scope="col">Nome</th>
@@ -141,13 +144,13 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td class="nome">@item.nome</td>
-                            <td>@item.email</td>
-                            <td>
+                        <td data-label="Nome" class="linkCurriculo"><a href="#">@item.nome</a></td>
+                        <td data-label="Email">@item.email</td>
+                        <td data-label="CPF">
                                 @Convert.ToUInt64(item.cpf).ToString(@"000\.000\.000\-00")
                             </td>
 
-                            <td>@item.telefone</td>
+                        <td data-label="Telefone">@item.telefone</td>
                             <td class="linkCurriculo"><a href="Painel/Visualizar?id=@item.idcantidado">Ver mais</a></td>
                         </tr>
                     }
@@ -159,7 +162,7 @@
                     </tr>
                 </thead>
             </table>
-        </div>
+       
     </div>
 
 </div>

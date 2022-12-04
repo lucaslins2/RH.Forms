@@ -7,7 +7,7 @@
 <div class="container">
     <div class="forms-container">
         <div class="signin-signup">
-            <form method="post" enctype="multipart/form-data" asp-controller="Login" asp-action="Logar" class="sign-in-form">
+            <form method="post" enctype="multipart/form-data" asp-controller="Login" asp-action="Logar"  class="sign-in-form">
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <input type="hidden" name="operacao" value="LOGIN">
                 <h2 class="title">Entrar</h2>
@@ -22,12 +22,12 @@
                 </div>
                 <input type="submit" value="Acessar" class="btn solid" />
             </form>
-            <form asp-controller="Login" asp-action="Registrar" class="sign-up-form" method="post">
+            <form asp-controller="Login" asp-action="Registrar" class="sign-up-form" id="cadastrar" method="post">
                 <input type="hidden" name="operacao" value="CADASTRO">
                 <h2 class="title">Cadastrar-se</h2>
                 <div class="input-field">
                     <i class="fas fa-user"></i>
-                    <input type="text" name="cpf" placeholder="CPF" @*pattern="[[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}"*@ required />
+                    <input type="text" name="cpf" placeholder="CPF" pattern="[[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}" required />
                 </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
                 <div class="input-field">
                     <i class="fas fa-user"></i>
