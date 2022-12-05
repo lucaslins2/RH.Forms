@@ -340,7 +340,7 @@
                     <label for="rua" class="form-label">Avenida/Rua:</label>
                     <input type="text" asp-for="endereco.rua" class="form-control" id="logradouro" placeholder="Insira a avenida/rua">
                 </div>
-           
+
             </div>
 
             <div class="d-flex flex-row justify-content-between w-100 div-responsivo">
@@ -352,7 +352,7 @@
                     <label for="bairro" class="form-label">Bairro:</label>
                     <input type="text" asp-for="endereco.bairro" class="form-control" id="bairro" placeholder="Insira o bairro">
                 </div>
-             
+
             </div>
 
             <div class="d-flex flex-row justify-content-between w-100 div-responsivo">
@@ -365,114 +365,119 @@
                     <input type="text" asp-for="endereco.estado" class="form-control" id="uf" placeholder="Insira o estado">
                 </div>
             </div>
-            <div class="div-dados-informacao">
-                <p>Empregos Anteriores</p>
-            </div>
-         
             <input id="contadorEmpregos" type="hidden" value="@Model.QtdExp.Count">
-    
-            <div id="empregosAnteriores">
-                @foreach (var i in Model.QtdExp)
-                {
-                 
-                    string DataAdmissao = "";
-                    string DataDemissao = "";
-                    if (Model.dataAdmissao[i] != null)
-                    {
-                        DataAdmissao = Convert.ToDateTime(Model.dataAdmissao[i]).ToString("yyyy-MM-dd");
-
-                    }
-                    if (Model.dataDemissao[i] != null)
-                    {
-                        DataDemissao = Convert.ToDateTime(Model.dataDemissao[i]).ToString("yyyy-MM-dd");
-
-                    }
-
-
-                    <div id="empregosAnterioresSessao@(i)">
-                        <div class="d-flex flex-row justify-content-between w-100 div-responsivo">
-                            <div class="w-100 p-3">
-                                <label for="empresa" class="form-label">Empresa:</label>
-                                <input type="text" class="form-control" id="empresa" name="empresa[@(i)]" value="@Model.empresa[i]" placeholder="Insira a empresa">
-                                <input type="hidden" name="idExperienciaAnterior[@(i)]" value="@Model.idExperienciaAnterior[i]">
-                            </div>
-                            <div class="w-100 p-3">
-                                <label for="telefoneEmpresa" class="form-label">Telefone:</label>
-                                <input type="text" class="form-control" id="telefoneEmpresa" name="telefoneEmpresa[@(i)]" value="@Model.telefoneEmpresa[i]" placeholder="Insira o número de telefone">
-                            </div>
-                        </div>
-
-                        <div class="d-flex flex-row justify-content-between w-100 div-responsivo">
-                            <div class="w-100 p-3">
-                                <label for="contato" class="form-label">Contato:</label>
-                                <input type="text" class="form-control" id="contato" name="contato[@(i)]" value="@Model.contato[i]" placeholder="Insira o contato">
-                            </div>
-                            <div class="w-100 p-3">
-                                <label for="setor" class="form-label">Setor:</label>
-                                <input type="text" class="form-control" id="setor" name="setor[@(i)]" value="@Model.setor[i]" placeholder="Insira o setor">
-                            </div>
-                        </div>
-
-                        <div class="d-flex flex-row justify-content-between w-100 div-responsivo">
-                            <div class="w-100 p-3">
-                                <label for="cargoExercido" class="form-label">Cargo que Exerceu:</label>
-                                <input type="text" class="form-control" id="cargoExercido" name="cargoExercido[@(i)]" value="@Model.cargoExercido[i]" placeholder="Insira o cargo que exerceu">
-                            </div>
-                            <div class="w-100 p-3">
-                                <label for="enderecoEmpresa" class="form-label">Endereço da Empresa:</label>
-                                <input type="text" class="form-control" id="enderecoEmpresa" name="enderecoEmpresa[@(i)]" value="@Model.enderecoEmpresa[i]" placeholder="Insira o endereço da empresa">
-                            </div>
-                        </div>
-
-                        <div class="d-flex flex-row justify-content-between w-100 div-responsivo">
-                            <div class="w-100 p-3">
-                                <label for="dataAdmissao" class="form-label">Data de Admissão:</label>
-                                <input type="date" class="form-control" id="dataAdmissao" name="dataAdmissao[@(i)]" value="@DataAdmissao">
-                            </div>
-                            <div class="w-100 p-3">
-                                <label for="dataDemissao" class="form-label">Data de Demissão:</label>
-                                <input type="date" class="form-control" id="dataDemissao" name="dataDemissao[@(i)]" value="@DataDemissao">
-                            </div>
-                        </div>
-
-                        <div class="d-flex flex-row justify-content-between w-100 div-responsivo">
-                            <div class="w-50 p-3 input-responsivo">
-                                <label for="motivoSaida" class="form-label">Motivo da Saída:</label>
-                                <input type="text" class="form-control" id="motivoSaida" name="motivoSaida[@(i)]" value="@Model.motivoSaida[i]" placeholder="Insira o motivo da saída">
-                                <input type="hidden" name="QtdExp[@(i)]" value="@(i)">
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                }
-
-
-            </div>
-
-            <div class="d-flex flex-row w-100 div-responsivo" id="divBtn">
-                <div type="button" class="d-flex align-items-center flex-row icon" onclick="addEmpregoAntigo()">
-                    <img src="../img/mais.png" alt="" width="32px" height="32px" style="margin-right: 5px;">
-                    <p>Adicionar uma nova experiencia</p>
+            @if ((ViewBag.Admin == 1 && Model.QtdExp.Count != 0) || ViewBag.Admin != 1)
+            {
+                <div class="div-dados-informacao">
+                    <p>Empregos Anteriores</p>
                 </div>
-                @if (Model.QtdExp.Count > 0)
-                {
-                    <div type="button" class="d-flex align-items-center flex-row icon" id="btnRemover"  onclick="removeEmpregoAntigo()">
-                        <img src="../img/menos.png" alt="" width="32px" height="32px" style="margin-right: 5px; margin-left: 5px;">
-                        <p>Remover uma nova experiencia</p>
+
+
+
+                <div id="empregosAnteriores">
+                    @foreach (var i in Model.QtdExp)
+                    {
+
+                        string DataAdmissao = "";
+                        string DataDemissao = "";
+                        if (Model.dataAdmissao[i] != null)
+                        {
+                            DataAdmissao = Convert.ToDateTime(Model.dataAdmissao[i]).ToString("yyyy-MM-dd");
+
+                        }
+                        if (Model.dataDemissao[i] != null)
+                        {
+                            DataDemissao = Convert.ToDateTime(Model.dataDemissao[i]).ToString("yyyy-MM-dd");
+
+                        }
+
+
+                        <div id="empregosAnterioresSessao@(i)">
+                            <div class="d-flex flex-row justify-content-between w-100 div-responsivo">
+                                <div class="w-100 p-3">
+                                    <label for="empresa" class="form-label">Empresa:</label>
+                                    <input type="text" class="form-control" id="empresa" name="empresa[@(i)]" value="@Model.empresa[i]" placeholder="Insira a empresa">
+                                    <input type="hidden" name="idExperienciaAnterior[@(i)]" value="@Model.idExperienciaAnterior[i]">
+                                </div>
+                                <div class="w-100 p-3">
+                                    <label for="telefoneEmpresa" class="form-label">Telefone:</label>
+                                    <input type="text" class="form-control" id="telefoneEmpresa" name="telefoneEmpresa[@(i)]" value="@Model.telefoneEmpresa[i]" placeholder="Insira o número de telefone">
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row justify-content-between w-100 div-responsivo">
+                                <div class="w-100 p-3">
+                                    <label for="contato" class="form-label">Contato:</label>
+                                    <input type="text" class="form-control" id="contato" name="contato[@(i)]" value="@Model.contato[i]" placeholder="Insira o contato">
+                                </div>
+                                <div class="w-100 p-3">
+                                    <label for="setor" class="form-label">Setor:</label>
+                                    <input type="text" class="form-control" id="setor" name="setor[@(i)]" value="@Model.setor[i]" placeholder="Insira o setor">
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row justify-content-between w-100 div-responsivo">
+                                <div class="w-100 p-3">
+                                    <label for="cargoExercido" class="form-label">Cargo que Exerceu:</label>
+                                    <input type="text" class="form-control" id="cargoExercido" name="cargoExercido[@(i)]" value="@Model.cargoExercido[i]" placeholder="Insira o cargo que exerceu">
+                                </div>
+                                <div class="w-100 p-3">
+                                    <label for="enderecoEmpresa" class="form-label">Endereço da Empresa:</label>
+                                    <input type="text" class="form-control" id="enderecoEmpresa" name="enderecoEmpresa[@(i)]" value="@Model.enderecoEmpresa[i]" placeholder="Insira o endereço da empresa">
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row justify-content-between w-100 div-responsivo">
+                                <div class="w-100 p-3">
+                                    <label for="dataAdmissao" class="form-label">Data de Admissão:</label>
+                                    <input type="date" class="form-control" id="dataAdmissao" name="dataAdmissao[@(i)]" value="@DataAdmissao">
+                                </div>
+                                <div class="w-100 p-3">
+                                    <label for="dataDemissao" class="form-label">Data de Demissão:</label>
+                                    <input type="date" class="form-control" id="dataDemissao" name="dataDemissao[@(i)]" value="@DataDemissao">
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row justify-content-between w-100 div-responsivo">
+                                <div class="w-50 p-3 input-responsivo">
+                                    <label for="motivoSaida" class="form-label">Motivo da Saída:</label>
+                                    <input type="text" class="form-control" id="motivoSaida" name="motivoSaida[@(i)]" value="@Model.motivoSaida[i]" placeholder="Insira o motivo da saída">
+                                    <input type="hidden" name="QtdExp[@(i)]" value="@(i)">
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    }
+
+
+                </div>
+            }
+            @if (ViewBag.Admin != 1)
+            {
+                <div class="d-flex flex-row w-100 div-responsivo" id="divBtn">
+                    <div type="button" class="d-flex align-items-center flex-row icon" onclick="addEmpregoAntigo()">
+                        <img src="../img/mais.png" alt="" width="32px" height="32px" style="margin-right: 5px;">
+                        <p>Adicionar uma nova experiencia</p>
                     </div>
-                }
-            </div>
+                    @if (Model.QtdExp.Count > 0)
+                    {
+                        <div type="button" class="d-flex align-items-center flex-row icon" id="btnRemover" onclick="removeEmpregoAntigo()">
+                            <img src="../img/menos.png" alt="" width="32px" height="32px" style="margin-right: 5px; margin-left: 5px;">
+                            <p>Remover uma nova experiencia</p>
+                        </div>
+                    }
+                </div>
+            }
+                <div class="d-flex flex-column align-items-end justify-content-end w-100 h-100 div-from-end">
+                    <input type="submit" href="#" class="btn button-end btn-lg btn-from-end" id="btnAdmin" value="Salvar" />
+                </div>
 
-            <div class="d-flex flex-column align-items-end justify-content-end w-100 h-100 div-from-end">
-                <input type="submit" href="#" class="btn button-end btn-lg btn-from-end" id="btnAdmin" value="Salvar" />
-            </div>
-
-            @*   <div class="d-flex flex-column align-items-end justify-content-end w-100 h-100 div-from-end">
-            <input type="submit" href="#" class="btn button-end btn-lg btn-from-end" value="Salvar"/>
-        </div>*@
-        </form>
+                @*   <div class="d-flex flex-column align-items-end justify-content-end w-100 h-100 div-from-end">
+                <input type="submit" href="#" class="btn button-end btn-lg btn-from-end" value="Salvar"/>
+            </div>*@
+            </form>
     </div>
 </div>
 

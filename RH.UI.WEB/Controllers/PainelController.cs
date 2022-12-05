@@ -25,6 +25,9 @@ namespace RH.UI.WEB.Controllers
             ViewBag.cargos= cargos;
             var  listaCanditados= canditadoBLL.GetCanditados();
             ViewBag.cidades = canditadoBLL.GetCidades();
+
+
+
             return View(listaCanditados);
         }
 
@@ -56,5 +59,24 @@ namespace RH.UI.WEB.Controllers
             return RedirectToAction("Index", "Home");
         
         }
+
+        public IActionResult GetCargos(int id)
+        {
+
+            CargoBLL cargoBLL = new CargoBLL();
+            var cargos = cargoBLL.GetCargosBLL(id);
+            string SelectCargos = "";
+            foreach (var item in cargos)
+            {
+                SelectCargos += "'" + item.idCargo + "':'" + item.cargo + "',";
+
+
+            }
+            SelectCargos = SelectCargos.Remove(SelectCargos.Length - 1);
+            return Json(SelectCargos);
+        }
     }
+
+
+   
 }

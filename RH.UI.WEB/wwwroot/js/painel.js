@@ -5,7 +5,7 @@
 
 //$('input[type=radio][name=idcargo]').change(function () {
 
-//    //AtualizarTabela();
+    //AtualizarTabela();
 //});
 
 //$('input[type=radio][name=idcidade]').change(function () {
@@ -107,11 +107,93 @@ $("input:radio").on("click", function (e) {
 });
 
 
-function onkeyEnterSubmit(event) {
+//function onkeyEnterSubmit(event) {
 
 
-    if (event.keyCode === 13) {
+//    if (event.keyCode === 13) {
 
+//    }
+
+//}
+
+
+function SelecionarCanditado(idUsuario, idCargo) {
+
+
+    let idcargo2 = $('input[type=radio][name=idcargo]:checked').val();
+    if (idcargo2 == undefined) {
+
+        idcargo2 = "0";
+    }
+
+    else {
+
+        alert("");
+        let cargos = null;
+        $.ajax({
+            type: "GET",
+            url: "Painel/GetCargos?id=" + idUsuario,
+           // contentType: "application/json; charset=utf-8",
+            //contentType: false,
+            //processData: false,
+            beforeSend: function () {
+                abrirCarregando();
+            },
+           // data: data,
+            success: function (data) {
+
+                // $('#conteudo-pesquisa').html(data);
+                cargos = JSON.parse(data);
+
+            },
+            error: function (e) {
+                fecharCarregando();
+                //  msgErroFalhaConexao(e.error);
+            },
+            complete: function () {
+
+                fecharCarregando();
+            }
+
+        });
+        //let lista = cargos.forEach(element => console.log(element));
+        let obj= {
+      
+
+
+        }
+
+        Swal.fire({
+            title: 'Vagas',
+            input: 'select',
+            //Isso aqui você pode passar um array pro java script se preferir
+            inputOptions: cargos,
+    //        inputOptions: {
+    //                '1': 'Vaga 1',
+    //                '2': 'Vaga 2',
+    //                '3': 'Vaga 3'
+    //},
+    inputPlaceholder: 'Selecione uma vaga',
+        showCancelButton: true,
+            confirmButtonText: 'Selecionar',
+                cancelButtonText: 'Voltar',
+                    confirmButtonColor: '#3390F1',
+                        cancelButtonColor: '#6D6D6F',
+                            inputValidator: function(value) {
+                                return new Promise(function (resolve, reject) {
+                                    if (value !== '') {
+                                        resolve();
+                                    } else {
+                                        resolve('Nenhuma vaga selecionada');
+                                    }
+                                });
+            }
+
+}).then(function (result) {
+    if (result.isConfirmed) {
+        window.location.replace("Questao?id=" + result.value);
+    }
+});
     }
 
 }

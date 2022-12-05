@@ -143,16 +143,18 @@
                 </tr>*@
                     @foreach (var item in Model)
                     {
-                        <tr>
+                    <tr>
                         <td data-label="Nome" class="linkCurriculo"><a href="#">@item.nome</a></td>
                         <td data-label="Email">@item.email</td>
                         <td data-label="CPF">
-                                @Convert.ToUInt64(item.cpf).ToString(@"000\.000\.000\-00")
-                            </td>
+                            @Convert.ToUInt64(item.cpf).ToString(@"000\.000\.000\-00")
+                        </td>
 
                         <td data-label="Telefone">@item.telefone</td>
-                            <td class="linkCurriculo"><a href="Painel/Visualizar?id=@item.idcantidado">Ver mais</a></td>
-                        </tr>
+                        @*<td class="linkCurriculo"><a href="Painel/Visualizar?id=@item.idcantidado">Ver mais</a></td>*@
+                   
+                        <td class="linkCurriculo"><a href="#" onclick="SelecionarCanditado(@item.idcantidado, @item.idcantidado);">Ver mais</a></td>
+                    </tr>
                     }
 
                 </tbody>
@@ -178,5 +180,7 @@
             document.getElementById("imgFiltro").src = "../img/filtro.png";
         }
     }
+
+
 </script>
 <script src="~/js/painel.js"></script>
