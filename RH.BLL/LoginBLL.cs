@@ -19,5 +19,12 @@ namespace RH.BLL
             return _loginDALL.Cadastrar(usuario);
         }
 
+        public Usuario VerificarEmailOuCPF(string email, string cpf)
+        {
+
+            return _loginDALL.VerificarEmailOuCPF(email, cpf);
+
+        }
+
     }
 }

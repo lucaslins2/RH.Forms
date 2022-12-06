@@ -80,6 +80,44 @@ namespace RH.DAL
         
         }
 
+        public Usuario VerificarEmailOuCPF(string email, string cpf)
+        {
 
+            var sql = "SELECT id, cpf,nome,email,  senha, admin " +
+         " FROM usuario" +
+        "  WHERE  cpf = @cpf OR email = @email ";
+
+            Usuario usuarios = null;// new Usuario();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = sql;
+            cmd.Parameters.Add("@cpf", MySqlDbType.VarChar, 11);
+            cmd.Parameters["@cpf"].Value = cpf;
+            cmd.Parameters.Add("@email", MySqlDbType.VarChar, 14);
+            cmd.Parameters["@email"].Value = email;
+
+            // Executa Comando => WGSC
+            using (conexao = new Conexao(null))
+            {
+                var retornoDr = conexao.ExecutaComandoComRetornoSdr(cmd);
+
+                if (retornoDr.Read())
+                {
+                    //string nomeUsuario = retornoDr["NomeUsuario"].ToString();
+                    usuarios = new Usuario()
+                    {
+                        IdUsuario = int.Parse(retornoDr["id"].ToString()),
+                        cpf = retornoDr["cpf"].ToString(),
+                        nome = retornoDr["nome"].ToString(),
+                        email = retornoDr["email"].ToString(),
+                        senha = retornoDr["senha"].ToString(),
+                        admin = int.Parse(retornoDr["admin"].ToString()),
+                        //    admin = Byte.Parse(retornoDr["Admin"].ToString()),
+                    };
+                }
+            }
+            return usuarios;
+        }
     }
 }

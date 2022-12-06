@@ -20,9 +20,9 @@ namespace RH.UI.WEB.Controllers
 
 
             var admin = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Role).Value;
-
+            var UerID = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
             CargoBLL cargoBLL = new CargoBLL();
-            var cargo = cargoBLL.GetCargo(id);
+            var cargo = cargoBLL.GetCargo(id,int.Parse(UerID));
             if (cargo.idvaga > 0 && admin!="admin")
             {
                 TempData["erroCargo"] = 1;

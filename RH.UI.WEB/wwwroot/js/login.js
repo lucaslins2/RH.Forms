@@ -38,6 +38,11 @@ function Login() {
         alertaPadraoSucesso("Registrado com Sucesso!");
 
     }
+    if ($LoginModal == 3) {
+
+        alertaPadraoErro("Email ou Senha ja existem!");
+
+    }
 
 }
 Login();

@@ -18,11 +18,14 @@ namespace RH.UI.WEB.Controllers
     public class FormularioController : Controller
     {
         [Authorize]
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
             var admin = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Role).Value;
             if (admin == "admin")
+            {
                 ViewBag.Admin = 1;//se o usuario for administrador disablita os campos
+                ViewBag.idCargo = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.GroupSid).Value;
+            }
 
             List<SelectListItem> itemsCargos = new List<SelectListItem>();
             CargoBLL cargoBLL = new CargoBLL();

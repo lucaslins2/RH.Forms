@@ -19,10 +19,11 @@ namespace RH.BLL
 
             return _CargoDAL.GetCargos(idUsuario);
         }
-        public Cargo GetCargo(int id) {
+        public Cargo GetCargo(int id,int idUsuario)
+        {
 
 
-            return _CargoDAL.GetCargo(id);
+            return _CargoDAL.GetCargo(id, idUsuario);
         }
 
 

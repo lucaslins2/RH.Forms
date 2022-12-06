@@ -34,7 +34,11 @@ namespace RH.UI.WEB.Controllers
             {
 
                 LoginBLL loginBLL = new LoginBLL();
-                 usuario =loginBLL.Login(nome, senha);
+
+                if(nome.IndexOf("@")>0)
+                usuario = loginBLL.Login(nome, senha);
+                else
+                usuario = loginBLL.Login(nome.Replace(".","").Replace("-",""), senha);
 
             }
             if(usuario!=null) {
@@ -97,10 +101,16 @@ namespace RH.UI.WEB.Controllers
                 usuarios.senha = login.senha;
                 usuarios.email = login.email;
 
-
-              int reposta=  loginBLL.Registrar(usuarios);   
+                var userExist = loginBLL.VerificarEmailOuCPF(usuarios.email, usuarios.cpf) ;
+            if (userExist == null) { 
+              int reposta=  loginBLL.Registrar(usuarios);
+                    TempData["erroLogin"] = "2";
+                }
+              else
+                TempData["erroLogin"] = "3";
             }
-            TempData["erroLogin"] = "2";
+
+       
             return RedirectToAction("Index", "Login");
 
         }

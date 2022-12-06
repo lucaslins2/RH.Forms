@@ -40,13 +40,17 @@ namespace RH.UI.WEB.Controllers
             return PartialView("_Lista", listaCanditados);
         }
 
-        public async Task<IActionResult> Visualizar(int id) {
+        public async Task<IActionResult> Visualizar(int id, int idCargo) {
             var nomeUsuario = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Name).Value;
+            if(idCargo==0)
+                return RedirectToAction("Index", "Painel");
+
             var claims = new List<Claim>()
                 {
                     new Claim(ClaimTypes.Name, nomeUsuario),
                     new Claim(ClaimTypes.Role, "admin"),
                     new Claim(ClaimTypes.Sid, id.ToString()),
+                    new Claim(ClaimTypes.GroupSid, idCargo.ToString()),
                 };
 
                 var usuarioIdentidade = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -56,7 +60,7 @@ namespace RH.UI.WEB.Controllers
        
 
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Formulario");
         
         }
 
@@ -65,15 +69,16 @@ namespace RH.UI.WEB.Controllers
 
             CargoBLL cargoBLL = new CargoBLL();
             var cargos = cargoBLL.GetCargosBLL(id);
-            string SelectCargos = "";
+            string SelectCargos = "{ ";
             foreach (var item in cargos)
             {
-                SelectCargos += "'" + item.idCargo + "':'" + item.cargo + "',";
+         //       SelectCargos += "'" + item.idCargo + "':'" + item.cargo + "',";
 
 
             }
             SelectCargos = SelectCargos.Remove(SelectCargos.Length - 1);
-            return Json(SelectCargos);
+           // SelectCargos += " } ";
+            return Json(cargos);
         }
     }
 

@@ -42,7 +42,8 @@ namespace RH.UI.WEB.Controllers
             var Onj = TempData["erroCargo"];
             if (Onj != null)
                 ViewBag.Message = TempData["erroCargo"].ToString();
-
+            else
+                ViewBag.Message = 0;
             if (validadadospessoais > 0) {
                 List<Cargo> cargos = cargoBLL.GetCargosBLL(!String.IsNullOrEmpty(UserIda)? int.Parse(UserIda): 0);
                 ViewBag.cargos = cargos;

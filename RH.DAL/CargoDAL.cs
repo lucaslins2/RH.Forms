@@ -40,13 +40,12 @@ namespace RH.DAL
         }
 
 
-        public Cargo GetCargo( int IdCargo)
+        public Cargo GetCargo(int IdCargo, int idUsuario)
         {
 
             string sql = "   SELECT c.idCargo, c.Descricao NomeCargo, fr.id idvaga  FROM cargo c" +
-                         " LEFT JOIN formularios fr ON fr.idCargo = c.idCargo " +
+                         " LEFT JOIN formularios fr ON fr.idCargo = c.idCargo " + " AND fr.idUsuario = " + idUsuario +
                          " WHERE c.idCargo = " + IdCargo;
-
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = sql;

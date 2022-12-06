@@ -5,7 +5,7 @@
 
 //$('input[type=radio][name=idcargo]').change(function () {
 
-    //AtualizarTabela();
+//AtualizarTabela();
 //});
 
 //$('input[type=radio][name=idcidade]').change(function () {
@@ -19,7 +19,7 @@ $('#maior18').click(function () {
 function AtualizarTabela() {
 
     let idcargo2 = $('input[type=radio][name=idcargo]:checked').val();
-    let maior182 = $('#maior18').is(':checked'); 
+    let maior182 = $('#maior18').is(':checked');
     let nomeCidade = $('input[type=radio][name=idcidade]:checked').val();
     let pesquisar2 = $("#Pesquisar").val();
 
@@ -33,14 +33,14 @@ function AtualizarTabela() {
         idcargo2 = "0";
 
 
-    obj =  {
+    obj = {
 
-        idcargo : parseInt(idcargo2),
+        idcargo: parseInt(idcargo2),
         maior18: maior182,
         cidade: nomeCidade,
         pesquisar: pesquisar2,
     }
-   let data = JSON.stringify(obj);
+    let data = JSON.stringify(obj);
 
     $.ajax({
         type: "POST",
@@ -54,7 +54,7 @@ function AtualizarTabela() {
         data: data,
         success: function (data) {
 
-        $('#conteudo-pesquisa').html(data);
+            $('#conteudo-pesquisa').html(data);
             //var $tabela = "#TabelaRetorno";
             //if ($($tabela).length > 0)
             //    $("#btn-RetornoResultado").show();
@@ -75,7 +75,7 @@ function AtualizarTabela() {
 
     });
 
- 
+
 }
 
 
@@ -117,34 +117,74 @@ $("input:radio").on("click", function (e) {
 //}
 
 
-function SelecionarCanditado(idUsuario, idCargo) {
+function SelecionarCanditado(idUsuario) {
 
 
     let idcargo2 = $('input[type=radio][name=idcargo]:checked').val();
-    if (idcargo2 == undefined) {
+    if (idcargo2 != undefined) {
 
-        idcargo2 = "0";
+        window.location.replace("Painel/Visualizar?id=" + idUsuario + "&idCargo=" + idcargo2);
     }
 
     else {
 
-        alert("");
+        //alert("");
         let cargos = null;
         $.ajax({
             type: "GET",
-            url: "Painel/GetCargos?id=" + idUsuario,
-           // contentType: "application/json; charset=utf-8",
+            url: "Painel/GetCargos/?id=" + idUsuario,
+            // contentType: "application/json; charset=utf-8",
             //contentType: false,
             //processData: false,
             beforeSend: function () {
                 abrirCarregando();
             },
-           // data: data,
+            // data: data,
             success: function (data) {
-
+                fecharCarregando();
                 // $('#conteudo-pesquisa').html(data);
-                cargos = JSON.parse(data);
+                console.log(data);
+                // cargos = JSON.parse(data);
+                cargos = data;
+                const map = new Map()
+              
+                if (cargos.length == 1) {
+                    window.location.replace("Painel/Visualizar/?id=" + idUsuario + "&idCargo=" + cargos[0].idCargo);
 
+                } else {
+                    cargos.forEach(element => map.set(element.idCargo, element.cargo));
+                    Swal.fire({
+                        title: 'Vagas aplicada do canditado',
+                        input: 'select',
+                        //Isso aqui você pode passar um array pro java script se preferir
+                        inputOptions: map,
+                        //        inputOptions: {
+                        //                '1': 'Vaga 1',
+                        //                '2': 'Vaga 2',
+                        //                '3': 'Vaga 3'
+                        //},
+                        inputPlaceholder: 'Selecione uma vaga',
+                        showCancelButton: true,
+                        confirmButtonText: 'Selecionar',
+                        cancelButtonText: 'Voltar',
+                        confirmButtonColor: '#3390F1',
+                        cancelButtonColor: '#6D6D6F',
+                        inputValidator: function (value) {
+                            return new Promise(function (resolve, reject) {
+                                if (value !== '') {
+                                    resolve();
+                                } else {
+                                    resolve('Nenhuma vaga selecionada');
+                                }
+                            });
+                        }
+
+                    }).then(function (result) {
+                        if (result.isConfirmed) {
+                            window.location.replace("Painel/Visualizar/?id=" + idUsuario + "&idCargo=" + result.value);
+                        }
+                    });
+                }
             },
             error: function (e) {
                 fecharCarregando();
@@ -157,43 +197,8 @@ function SelecionarCanditado(idUsuario, idCargo) {
 
         });
         //let lista = cargos.forEach(element => console.log(element));
-        let obj= {
-      
 
 
-        }
-
-        Swal.fire({
-            title: 'Vagas',
-            input: 'select',
-            //Isso aqui você pode passar um array pro java script se preferir
-            inputOptions: cargos,
-    //        inputOptions: {
-    //                '1': 'Vaga 1',
-    //                '2': 'Vaga 2',
-    //                '3': 'Vaga 3'
-    //},
-    inputPlaceholder: 'Selecione uma vaga',
-        showCancelButton: true,
-            confirmButtonText: 'Selecionar',
-                cancelButtonText: 'Voltar',
-                    confirmButtonColor: '#3390F1',
-                        cancelButtonColor: '#6D6D6F',
-                            inputValidator: function(value) {
-                                return new Promise(function (resolve, reject) {
-                                    if (value !== '') {
-                                        resolve();
-                                    } else {
-                                        resolve('Nenhuma vaga selecionada');
-                                    }
-                                });
-            }
-
-}).then(function (result) {
-    if (result.isConfirmed) {
-        window.location.replace("Questao?id=" + result.value);
-    }
-});
     }
 
 }
