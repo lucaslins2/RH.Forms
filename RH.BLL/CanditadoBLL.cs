@@ -28,5 +28,7 @@ namespace RH.BLL
             return _CanditadoDAL.GetCidades();
         
         }
+
+     
     }
 }

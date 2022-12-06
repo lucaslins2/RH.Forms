@@ -480,22 +480,26 @@
                     }
                 </div>
             }
-                <div class="d-flex flex-column align-items-end justify-content-end w-100 h-100 div-from-end">
-                    <input type="submit" href="#" class="btn button-end btn-lg btn-from-end" id="btnAdmin" value="Salvar" />
-                </div>
+            <div class="d-flex flex-column align-items-start w-100 h-100 mt-3">
+                <a type="button" href="#" class="mt-2"><img src="../img/pdf.png" alt="" width="38px" height="38px" style="margin-right: 5px; margin-left:-6px;">Importar currículo</a>
+                <a type="button" href="#" class="mt-2"><img src="../img/pdf.png" alt="" width="38px" height="38px" style="margin-right: 5px; margin-left:-6px;">Exportar currículo</a>
+            </div>
+            <div class="d-flex flex-column align-items-end justify-content-end w-100 h-100 div-from-end">
+                <input type="submit" href="#" class="btn button-end btn-lg btn-from-end" id="btnAdmin" value="Salvar" />
+            </div>
             @if (ViewBag.admin == 1)
             {
-                
-            <div class="d-flex flex-column align-items-end justify-content-end w-100 h-100 div-from-end">
+
+                <div class="d-flex flex-column align-items-end justify-content-end w-100 h-100 div-from-end">
                     <a type="button" href="Questao?id=@ViewBag.idcargo" class="btn button-end btn-lg btn-from-end" id="btnAdmin2">Proximo</a>
                 </div>
-            
+
             }
 
-                @*   <div class="d-flex flex-column align-items-end justify-content-end w-100 h-100 div-from-end">
-                <input type="submit" href="#" class="btn button-end btn-lg btn-from-end" value="Salvar"/>
-            </div>*@
-            </form>
+            @*   <div class="d-flex flex-column align-items-end justify-content-end w-100 h-100 div-from-end">
+            <input type="submit" href="#" class="btn button-end btn-lg btn-from-end" value="Salvar"/>
+        </div>*@
+        </form>
     </div>
 </div>
 

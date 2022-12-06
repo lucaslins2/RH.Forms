@@ -5,21 +5,31 @@
     string SelectCargos = "";
     string onlickBack = "";
 
-    if (ViewBag.IdUsuarioDadosPessoais > 0)
-    { 
-        active = "-active";
-         onlickBack = "onclick=selecionarVaga()";
+    string activeSub = "";
+    string onclickSub = "";
 
-     
+    if (ViewBag.IdUsuarioDadosPessoais > 0)
+    {
+        active = "-active";
+        onlickBack = "onclick=selecionarVaga()";
+
+
         foreach (var item in ViewBag.cargos)
         {
             SelectCargos += "'" + item.idCargo + "':'" + item.cargo + "',";
 
-        
+
         }
         SelectCargos = SelectCargos.Remove(SelectCargos.Length - 1);
-    
+
     }
+
+    if (ViewBag.IdSubmissao > 0) {
+
+        activeSub = "-active";
+        onclickSub = "onclick=verSubmissao()";
+    }
+
 
 }
 <link rel="stylesheet" href="~/css/estiloFicha.css">
@@ -51,8 +61,8 @@
             </div>
 
             <div class="px-5">
-                <div type="button" class="d-flex flex-column align-items-center div-card">
-                    <div class="div-form-icon">
+                <div type="button" class="d-flex flex-column align-items-center div-card"  @onclickSub>
+                    <div class="div-form-icon@(activeSub)">
                         <img class="img-icon" src="../img/baixar-seta.png" width="64" height="64" alt="">
                     </div>
                     <p>Ver submissão</p>
@@ -74,6 +84,11 @@
 
         window.location.replace("formulario");
     
+    }
+    function verSubmissao() {
+
+        window.location.replace("Submissoes");
+
     }
     function selecionarVaga() {
 
@@ -117,9 +132,20 @@
 
         if ($LoginModal == 1) {
 
-            alertaPadraoErro("Cargo ja foi aplicado");
+            alertaPadraoErro("Cargo ja foi aplicado!");
 
         }
+        if ($LoginModal == 2) {
+
+            alertaPadraoSucesso("Dados Pessoais salvo com Sucesso!");
+
+        }
+        if ($LoginModal == 3) {
+
+            alertaPadraoSucesso("Canditadura submetida com sucesso!");
+
+        }
+
         //if ($LoginModal == 2) {
 
         //    alertaPadraoSucesso("Registrado com Sucesso!");

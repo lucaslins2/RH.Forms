@@ -74,5 +74,75 @@ namespace RH.DAL
             }
             return lista;
         }
+
+
+
+        public List<Submissoes> GetSubmissoes(int idUsuario)
+        {
+
+            string sql = " SELECT   fr.id idVaga,c.Descricao NomeVaga, fr.Status, fr.DtaCad   FROM formularios fr " +
+                         " INNER JOIN cargo c ON C.idCargo = fr.idCargo" +
+                         " WHERE fr.idUsuario = "+ idUsuario; 
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = sql;
+
+            using (conexao = new Conexao(null))
+            {
+                var retornoDr = conexao.ExecutaComandoComRetornoSdr(cmd);
+                return TransformaReaderEmListaDeObjetosSubmissoes(retornoDr);
+            }
+
+        }
+
+        public List<Submissoes> TransformaReaderEmListaDeObjetosSubmissoes(MySqlDataReader reader)
+        {
+
+
+            var lista = new List<Submissoes>();
+            while (reader.Read())
+            {
+                var tmpObjeto = new Submissoes()
+                {
+                    idVaga = int.Parse(reader["idVaga"].ToString()),
+                    NomeVaga = reader["NomeVaga"].ToString(),
+                    Status = StringParaInt(reader["Status"].ToString()),
+                    DtaCad = StringParaDate(reader["DtaCad"].ToString()),
+                    HoraCad = StringParaDate(reader["DtaCad"].ToString()),
+
+                };
+                lista.Add(tmpObjeto);
+            }
+            return lista;
+        }
+
+        public int GetVerSubmissoes(int idUsuario)
+        {
+
+            string sql = " SELECT   fr.id idVaga   FROM formularios fr " +
+                       //  " INNER JOIN cargo c ON C.idCargo = fr.idCargo" +
+                         " WHERE fr.idUsuario = " + idUsuario;
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandType = CommandType.Text;
+            cmd.CommandText = sql;
+
+            using (conexao = new Conexao(null))
+            {
+                var retornoDr = conexao.ExecutaComandoComRetornoSdr(cmd);
+                return TransformaReaderEmListaDeObjetosVerSubmissoes(retornoDr);
+            }
+
+        }
+
+        public int TransformaReaderEmListaDeObjetosVerSubmissoes(MySqlDataReader reader)
+        {
+            while (reader.Read())
+            {
+                return int.Parse(reader["idVaga"].ToString());
+            }
+            return 0;
+        }
     }
 }

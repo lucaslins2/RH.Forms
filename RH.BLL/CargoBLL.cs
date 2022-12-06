@@ -26,6 +26,14 @@ namespace RH.BLL
             return _CargoDAL.GetCargo(id, idUsuario);
         }
 
+        public List<Submissoes> GetSubmissoes(int IdUsuario) {
+
+            return _CargoDAL.GetSubmissoes(IdUsuario);
+        }
+        public int VerSubmissao(int idUsuario) {
+
+        return    _CargoDAL.GetVerSubmissoes(idUsuario);
+        }
 
     }
 

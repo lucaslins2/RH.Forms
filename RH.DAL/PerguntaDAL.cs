@@ -99,7 +99,7 @@ namespace RH.DAL
         }
         public int SalvarVaga(int idUsuario, int IdCargo) {
 
-            string sql = " INSERT INTO formularios (idUsuario, idCargo, Status) VALUES( @idUsuario,@idCargo, @Status) ";
+            string sql = " INSERT INTO formularios (idUsuario, idCargo, Status, DtaCad) VALUES( @idUsuario,@idCargo, @Status,  NOW()) ";
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandType = CommandType.Text;
             cmd.CommandText = sql;
@@ -119,7 +119,7 @@ namespace RH.DAL
         {
 
             //string sql = " INSERT INTO formularios (idUsuario, idCargo, Status) VALUES( @idUsuario,@idCargo, @Status) ";
-            string sql = "UPDATE formularios SET Status = @Status WHERE id = @id";
+            string sql = "UPDATE formularios SET Status = @Status, DtaResp = NOW() WHERE id = @id";
 
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandType = CommandType.Text;

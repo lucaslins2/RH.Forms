@@ -1,0 +1,56 @@
+﻿@using RH.Models;
+@model List<Submissoes>;
+<link rel="stylesheet" href="~/css/estiloCandidaturas.css">
+<link rel="stylesheet" href="../css/estiloForm.css">
+<div class="container-fluid h-100">
+    <div class="div-dados-informacao container-fluid titulo-dados">
+        <a href="ficha"><img class="img-icon" src="../img/seta-lado.png" alt=""></a>
+        <p>Submissões - @DateTime.Now.ToString("dd/MM/yyyy")</p>
+    </div>
+
+    <table class="table">
+        <thead class="titulo">
+            <tr>
+                <th scope="col">Nome da Vaga</th>
+                <th scope="col">Data da Canditadura</th>
+                <th scope="col">Status</th>
+                <th scope="col">Data da Reposta</th>
+                @*<th scope="col">Data da Reposta</th>*@
+                @*<th scope="col"></th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td data-label="Nome da Vaga" class="linkCurriculo">@item.NomeVaga@*<a href=""></a>*@</td>
+                <td data-label="Data da Canditadura">@Html.DisplayFor(modelItem => item.DtaCad)</td>
+
+                @switch (item.Status)
+                {
+
+                    case 0:
+                        <td data-label="Status">Em Analisé</td>
+                        break;
+                    case 1:
+                        <td data-label="Status">Reprovado</td>
+                        break;
+                    case 2:
+                        <td data-label="Status">Aprovado</td>
+                        break;
+
+                }
+                <td data-label="Dada da Reposta">@Html.DisplayFor(modelItem => item.DtaResp)</td>
+
+                @*<td class="linkCurriculo"><a href="">Ver mais</a></td>*@
+            </tr>
+            }
+            </tbody>
+
+        <thead class="footer">
+            <tr>
+                <th colspan="5"></th>
+            </tr>
+        </thead>
+    </table>
+    </div>

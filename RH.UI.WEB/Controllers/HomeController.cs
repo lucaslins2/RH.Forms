@@ -35,11 +35,12 @@ namespace RH.UI.WEB.Controllers
             DadosPessoaisForm1BLL dadosPessoaisForm1BLL = new DadosPessoaisForm1BLL();
             var UserID = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
            int? validadadospessoais  = dadosPessoaisForm1BLL.VerificarDadosPessoaisForm1(int.Parse(UserID));
-
+         
             ViewBag.IdUsuarioDadosPessoais = validadadospessoais;
             CargoBLL cargoBLL = new CargoBLL();
-
-            var Onj = TempData["erroCargo"];
+            int verSubmissoes = cargoBLL.VerSubmissao(int.Parse(UserID));
+            ViewBag.IdSubmissao = verSubmissoes;
+           var Onj = TempData["erroCargo"];
             if (Onj != null)
                 ViewBag.Message = TempData["erroCargo"].ToString();
             else

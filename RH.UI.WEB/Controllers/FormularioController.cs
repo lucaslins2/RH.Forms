@@ -197,6 +197,7 @@ namespace RH.UI.WEB.Controllers
 
             await HttpContext.SignInAsync(principal, props);
             }
+            TempData["erroCargo"] = 2;
             return RedirectToAction("Index", "Home");
         
         }

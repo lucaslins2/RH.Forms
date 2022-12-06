@@ -9,9 +9,10 @@ using System.Security.Claims;
 
 namespace RH.UI.WEB.Controllers
 {
+    [Authorize]
     public class QuestaoController : Controller
     {
-        [Authorize]
+      
         public IActionResult Index(int id)
         {
 
@@ -46,6 +47,7 @@ namespace RH.UI.WEB.Controllers
             var UserID = HttpContext.User.Claims.First(c => c.Type == ClaimTypes.Sid).Value;
             perguntaBLL.SalvarReposta(perguntas, int.Parse(UserID));
             perguntaBLL.SalvarVagar(int.Parse(UserID), idCargo);
+            TempData["erroCargo"] = 3;
             return RedirectToAction("Home", "Index");
         }
 
