@@ -15,7 +15,7 @@ namespace RH.DAL
 
             var sql = "SELECT id, cpf,nome,email,  senha, admin " +
          " FROM usuario" +
-        "  WHERE senha = @senha AND cpf = @usuario OR email = @usuario ";
+        "  WHERE senha = @senha AND (cpf = @usuario OR email = @usuario) ";
 
             Usuario usuarios = null;// new Usuario();
 

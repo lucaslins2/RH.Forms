@@ -2,7 +2,7 @@ $("#cep").mask("99999-999");
 $("#telefoneFixo").mask("(99)9999-9999");
 $("#celular").mask("(99)99999-9999");
 
-$("#RG").mask("99.999.999-9");
+//$("#RG").mask("99.999.999-9");
 
 $('#telefoneEmpresa').mask('(00)0000-0000', {
     onKeyPress: function (cpfcnpj, e, field, options) {

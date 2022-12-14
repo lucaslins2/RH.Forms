@@ -80,7 +80,7 @@ namespace RH.DAL
         public List<Submissoes> GetSubmissoes(int idUsuario)
         {
 
-            string sql = " SELECT   fr.id idVaga,c.Descricao NomeVaga, fr.Status, fr.DtaCad   FROM formularios fr " +
+            string sql = " SELECT   fr.id idVaga,c.Descricao NomeVaga, fr.Status, fr.DtaCad, fr.DtaResp   FROM formularios fr " +
                          " INNER JOIN cargo c ON c.idCargo = fr.idCargo" +
                          " WHERE fr.idUsuario = "+ idUsuario; 
 
@@ -110,6 +110,7 @@ namespace RH.DAL
                     Status = StringParaInt(reader["Status"].ToString()),
                     DtaCad = StringParaDate(reader["DtaCad"].ToString()),
                     HoraCad = StringParaDate(reader["DtaCad"].ToString()),
+                    DtaResp = StringParaDate(reader["DtaResp"].ToString()),
 
                 };
                 lista.Add(tmpObjeto);
