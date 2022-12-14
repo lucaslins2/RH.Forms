@@ -11,6 +11,7 @@ namespace RH.Models
         public string cidade { get; set; }
 
         public string pesquisar { get; set; }
+        public int status{get; set;}
 
     }
 }

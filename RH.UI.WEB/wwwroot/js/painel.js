@@ -21,6 +21,7 @@ function AtualizarTabela() {
     let idcargo2 = $('input[type=radio][name=idcargo]:checked').val();
     let maior182 = $('#maior18').is(':checked');
     let nomeCidade = $('input[type=radio][name=idcidade]:checked').val();
+    let status = $('input[type=radio][name=status]:checked').val();
     let pesquisar2 = $("#Pesquisar").val();
 
 
@@ -31,7 +32,8 @@ function AtualizarTabela() {
         pesquisar2 = "";
     if (idcargo2 == undefined)
         idcargo2 = "0";
-
+    if (status == undefined)
+        status = 3;
 
     obj = {
 
@@ -39,6 +41,7 @@ function AtualizarTabela() {
         maior18: maior182,
         cidade: nomeCidade,
         pesquisar: pesquisar2,
+        status: parseInt(status)
     }
     let data = JSON.stringify(obj);
 

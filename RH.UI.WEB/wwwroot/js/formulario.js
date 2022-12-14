@@ -1,13 +1,13 @@
 $("#cep").mask("99999-999");
-$("#telefoneFixo").mask("9999-9999");
-$("#celular").mask("99999-9999");
+$("#telefoneFixo").mask("(99)9999-9999");
+$("#celular").mask("(99)99999-9999");
 
 $("#RG").mask("99.999.999-9");
 
-$('#telefoneEmpresa').mask('0000-0000', {
+$('#telefoneEmpresa').mask('(00)0000-0000', {
     onKeyPress: function (cpfcnpj, e, field, options) {
-        const masks = ['0000-00000', '00000-0000'];
-        const mask = (cpfcnpj.length > 9) ? masks[1] : masks[0];
+        const masks = ['(99)99999-9999', '(99)99999-9999'];
+        const mask = (cpfcnpj.length >12) ? masks[1] : masks[0];
         $('#telefoneEmpresa').mask(mask, options);
     }
 });

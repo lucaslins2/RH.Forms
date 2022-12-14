@@ -129,6 +129,20 @@ namespace RH.DAL
 
 
             }
+            if (filtros.status != 3)
+            {
+                if (!String.IsNullOrEmpty(Where))
+                {
+                    Where += " AND fr.Status = " + filtros.status;
+
+                }
+                else
+                {
+                    Where += " WHERE fr.Status = " + filtros.status;
+
+                }
+
+            }
 
             sql +=" " +Where + " " + GroupBy + " " + OrderBy;
            

@@ -81,7 +81,7 @@ namespace RH.DAL
         {
 
             string sql = " SELECT   fr.id idVaga,c.Descricao NomeVaga, fr.Status, fr.DtaCad   FROM formularios fr " +
-                         " INNER JOIN cargo c ON C.idCargo = fr.idCargo" +
+                         " INNER JOIN cargo c ON c.idCargo = fr.idCargo" +
                          " WHERE fr.idUsuario = "+ idUsuario; 
 
             MySqlCommand cmd = new MySqlCommand();

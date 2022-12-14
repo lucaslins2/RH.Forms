@@ -36,7 +36,7 @@ function AlertaConfrima(pText, btnCanditado) {
         showDenyButton: true,
         showCancelButton: false,
         confirmButtonText: 'Sim',
-        denyButtonText: `Não`,
+        denyButtonText: 'N\u00e3o',
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
